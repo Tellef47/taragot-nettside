@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5b / Taragot — nettside (prototype)</title>
+
+  <!-- Inter (gratis, Google Fonts/OFL) — valgt av designer 2026-09-15 for all
+       tekst. Logoen beholder serif (se --font-logo i tokens.css). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Alle farger, fonter og størrelser kommer herfra. Endres av designerne. -->
+  <link rel="stylesheet" href="tokens.css">
+
+  <style>
+    /* --- Prototype-oppsett. Bruker KUN variablene fra tokens.css. ---------
+       Frittstående skisse (ingen database ennå). Endringer 2026-09-15 følger
+       designerens innspill mot dagens taragot.com. */
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-brodtekst);
+      font-size: var(--t-brod);
+      line-height: var(--linjehoyde);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* Tydelig merke om at dette er en prototype under arbeid. */
+    .proto-varsel {
+      background: var(--text);
+      color: var(--bg);
+      font-family: var(--font-meny);
+      font-size: var(--t-liten);
+      text-align: center;
+      padding: 8px 16px;
+      letter-spacing: 0.02em;
+    }
+
+    /* --- Toppmeny: off-white, høyrestilte lenker, sticky ------------------ */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px var(--gutter);
+      transition: transform .3s ease;
+    }
+    .nav--skjult { transform: translateY(-100%); }
+    .logo {
+      font-family: var(--font-logo);
+      color: var(--aksent);                 /* logo forblir oransje */
+      font-size: var(--t-h3);
+      letter-spacing: 0.02em;
+    }
+    .nav-hoyre { display: flex; align-items: center; gap: 26px; }
+    .nav-lenker { display: flex; gap: 26px; }
+    .nav-lenker a, .sprak {
+      color: var(--text);                   /* svart tekst */
+      font-family: var(--font-meny);
+      font-size: var(--t-meny);
+      transition: opacity .15s ease;
+    }
+    .nav-lenker a:hover, .sprak:hover { opacity: .45; }   /* blek/grå ved hover */
+    .sprak {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: none; border: none; cursor: pointer;
+    }
+    .sprak svg { width: 17px; height: 17px; }
+
+    /* --- Hero / video: 55px sider, 40px topp/bunn, skjult i mobil --------- */
+    .hero { padding: 40px var(--gutter); }
+    .video {
+      width: 100%; aspect-ratio: 21 / 9;
+      background: #2C2C2A;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg);
+    }
+    .video-note { font-family: var(--font-meny); font-size: var(--t-liten); opacity: .8; }
+    .video-play {
+      width: 54px; height: 54px; border-radius: 50%;
+      border: 1.5px solid var(--bg);
+      display: flex; align-items: center; justify-content: center; margin-right: 14px;
+    }
+    .video-play::before {
+      content: ""; border-left: 15px solid var(--bg);
+      border-top: 9px solid transparent; border-bottom: 9px solid transparent;
+      margin-left: 4px;
+    }
+
+    /* --- Seksjoner -------------------------------------------------------- */
+    .seksjon { padding: 8px var(--gutter) 56px; }
+    .seksjon > h2 {
+      color: var(--text);                   /* overskrift svart */
+      font-family: var(--font-overskrift);
+      font-size: var(--t-h2); font-weight: 600;
+      margin: 24px 0 22px;
+    }
+    .intro { max-width: 60ch; margin: 0 0 6px; }
+
+    .kort-rad {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
+    }
+    .kort { color: inherit; }
+    .cover {
+      aspect-ratio: 1 / 1; background: var(--bg-alt);
+      border: 1px solid var(--linje);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 12px;
+      color: var(--text-svak); font-family: var(--font-meny);
+      font-size: var(--t-caption); letter-spacing: .06em;
+    }
+    .kort h3 { font-size: var(--t-brod); font-weight: 500; margin: 14px 0 3px; }
+    .kort .meta { font-size: var(--t-liten); color: var(--text-svak); margin: 0; }
+
+    /* --- Knapper: helt oransje, hvit fetere tekst, grå ved hover ---------- */
+    .knapp {
+      display: inline-block; cursor: pointer;
+      background: var(--aksent); color: #FFFFFF;
+      font-family: var(--font-meny); font-weight: 600; font-size: var(--t-meny);
+      border: none; border-radius: 8px; padding: 12px 26px;
+      transition: background .15s ease;
+    }
+    .knapp:hover { background: var(--knapp-hover); }
+    .midt { text-align: center; margin-top: 34px; }
+
+    /* --- Nyhetsbrev: hvit rundet rute, rundet input, svarte konturer ------ */
+    .nyhetsbrev { text-align: center; }
+    .paamelding {
+      background: var(--bg-alt); border-radius: 16px;
+      max-width: 520px; margin: 6px auto 0; padding: 30px 28px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .paamelding input[type="email"] {
+      width: 100%; padding: 13px 15px;
+      border: 1.5px solid var(--linje-svart); border-radius: 10px;
+      font-family: var(--font-brodtekst); font-size: var(--t-meny);
+    }
+    .samtykke { display: flex; align-items: center; gap: 10px; font-size: var(--t-liten); text-align: left; }
+    .samtykke input {
+      width: 20px; height: 20px; flex: none;
+      border: 1.5px solid var(--linje-svart); appearance: none; border-radius: 4px;
+      cursor: pointer; display: inline-grid; place-content: center;
+    }
+    .samtykke input:checked { background: var(--aksent); border-color: var(--aksent); }
+    .samtykke input:checked::before { content: "✓"; color: #fff; font-size: 13px; }
+
+    /* --- Bunntekst: 55px, off-white, svart topplinje, oransje logo -------- */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--linje-svart);   /* tynn svart linje på toppen */
+      padding: 36px var(--gutter) 56px;
+      display: flex; flex-wrap: wrap; gap: 28px;
+      justify-content: space-between; align-items: flex-start;
+    }
+    .foot-kol { font-size: var(--t-liten); color: var(--text); line-height: 1.9; }
+    .foot-kol .logo { font-size: var(--t-h3); }
+    .some { display: flex; gap: 12px; margin-top: 6px; }
+    .some a {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--text); color: var(--bg);   /* svarte SoMe-knapper */
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600; transition: opacity .15s ease;
+    }
+    .some a:hover { opacity: .55; }
+
+    /* =====================================================================
+       RESPONSIVT — kortene går 4 → 3 → 2 → 1. Video skjules i mobil.
+       ===================================================================== */
+    @media (max-width: 900px) {
+      .kort-rad { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    }
+    @media (max-width: 767px) {
+      :root { --gutter: 20px; }
+      .hero { display: none; }                      /* video fjernes i mobil */
+      .kort-rad { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .nav-lenker { gap: 16px; }
+      .seksjon > h2 { font-size: var(--t-h1); }
+    }
+    @media (max-width: 360px) {
+      .kort-rad { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nav { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="proto-varsel">
+    PROTOTYPE — under arbeid. Dette er en skisse av den nye nettsiden.
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="logo" href="#">Taragot Sounds</a>
+    <div class="nav-hoyre">
+      <nav class="nav-lenker">
+        <a href="#katalog">katalog</a>
+        <a href="#">om oss</a>
+        <a href="#">kontakt</a>
+      </nav>
+      <button class="sprak" aria-label="Velg språk">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"></path>
+        </svg>
+        NO
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="video">
+        <div class="video-play" aria-hidden="true"></div>
+        <span class="video-note">Videokarusell — plassholder</span>
+      </div>
+    </div>
+
+    <section class="seksjon" id="katalog">
+      <p class="intro">Norsk plateselskap med en katalog bestående av skandinavisk
+        folkemusikk, fri improvisasjon og samtidsjazz.</p>
+      <h2>Nyeste utgivelser</h2>
+      <div class="kort-rad">
+        <a class="kort" href="#"><div class="cover">Song for Bird II</div><h3>Song for Bird II</h3><p class="meta">Knut Kvifte Nesheim · 2025</p></a>
+        <a class="kort" href="#"><div class="cover">Gangar etter Olav Dale</div><h3>Gangar etter Olav Dale</h3><p class="meta">Edén/Kvifte/Nesheim Trio · 2025</p></a>
+        <a class="kort" href="#"><div class="cover">Hamborg</div><h3>Hamborg</h3><p class="meta">Camilla Hole Trio · 2024</p></a>
+        <a class="kort" href="#"><div class="cover">Upstairs in a Tent</div><h3>Upstairs in a Tent</h3><p class="meta">Tellefs · 2024</p></a>
+      </div>
+      <div class="midt"><a class="knapp" href="#">Se alle utgivelser</a></div>
+    </section>
+
+    <section class="seksjon nyhetsbrev">
+      <h2>Abonner på vårt nyhetsbrev</h2>
+      <form class="paamelding" onsubmit="return false">
+        <input id="epost" type="email" placeholder="Din e-postadresse" />
+        <label class="samtykke"><input id="samtykke" type="checkbox" />
+          Ja, meld meg på nyhetsbrevet</label>
+        <button class="knapp" type="submit">Send inn</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-kol">
+      <a class="logo" href="#">Taragot Sounds</a>
+      <div style="margin-top:10px">Oslo, Norge</div>
+      <div>post@taragot.no</div>
+    </div>
+    <div class="foot-kol">
+      Katalog<br>Om oss<br>Kontakt
+    </div>
+    <div class="foot-kol">
+      Følg oss
+      <div class="some">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="Instagram">ig</a>
+        <a href="#" aria-label="Bandcamp">bc</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var nav = document.getElementById('nav');
+    var sisteY = window.scrollY;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      if (y > sisteY && y > 90) nav.classList.add('nav--skjult');
+      else nav.classList.remove('nav--skjult');
+      sisteY = y;
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

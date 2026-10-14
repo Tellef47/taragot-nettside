@@ -1,0 +1,66 @@
+/* =====================================================================
+   Design-tokens for 5b / Taragot — offentlig nettside
+   ---------------------------------------------------------------------
+   Grunnmuren prototypen bygger på: farger, fonter og typeskala som
+   CSS-variabler. Designeren overstyrer verdiene her uten å røre annen kode.
+
+   Utgangspunkt hentet fra taragot.com (Wix, 2026-06-20). Oppdatert med
+   designer-innspill 2026-09-15: aksent = oransje, all tekst svart, Inter.
+   ===================================================================== */
+
+:root {
+
+  /* --- FARGER ------------------------------------------------------- */
+  --bg:        #FCFCFB;   /* sidebakgrunn (off-white) — navbar, hero, footer */
+  --bg-alt:    #FFFFFF;   /* hvite kort/ruter (nyhetsbrev) */
+  --text:      #000000;   /* all tekst helt svart (designer 2026-09-15) */
+  --text-svak: #8F8F8F;   /* sekundær tekst / metadata (grå) */
+  --text-svak-2: #646464; /* mørkere grå variant */
+  --linje:     #E2E2E2;   /* svake skillelinjer (kort-grid o.l.) */
+  --linje-sterk: #B0B0B0; /* tydeligere linjer */
+  --linje-svart: #000000; /* svarte konturer: input, footer-topplinje */
+
+  --aksent:       #EA854C;  /* ORANSJE — bekreftet av designer 2026-09-15
+                               (logo + knapper). Wix-tema color_18.        */
+  --knapp-hover:  #A6A6A6;  /* grå ved hover på knapper (designer)         */
+
+  /* --- FONTER -------------------------------------------------------
+     Designer 2026-09-15: all tekst i Inter, unntatt logoen som beholder
+     en serif. Inter er gratis (Google Fonts, OFL). Den endelige serifen
+     til logoen avklares med designer — inntil da generisk serif-fallback. */
+
+  --font-logo:      Georgia, "Times New Roman", serif;     /* kun logo/wordmark */
+  --font-overskrift: "Inter", system-ui, -apple-system, sans-serif;
+  --font-brodtekst:  "Inter", system-ui, -apple-system, sans-serif;
+  --font-meny:       "Inter", system-ui, -apple-system, sans-serif;
+
+  /* --- TYPESKALA (linjehøyde 1.4) ----------------------------------- */
+  --t-hero:       80px;
+  --t-sidetittel: 60px;
+  --t-h1:         48px;
+  --t-h2:         40px;
+  --t-h3:         24px;
+  --t-brod:       18px;
+  --t-meny:       16px;
+  --t-liten:      14px;
+  --t-caption:    12px;
+  --linjehoyde:   1.4;
+
+  /* --- LAYOUT -------------------------------------------------------- */
+  --gutter:       55px;   /* sidemarginal på desktop (designer)          */
+
+}
+
+/* =====================================================================
+   FONT-NOTAT
+   ---------------------------------------------------------------------
+   Designer valgte Inter til all tekst (2026-09-15). Inter er gratis
+   (Google Fonts / OFL) — fri å selvhoste, ingen lisenshake.
+
+   Logoen «Taragot Sounds» beholder en serif (--font-logo). Hvilken
+   eksakt serif taragot.com bruker er ikke fastslått ennå; prototypen
+   viser en generisk serif inntil designer bekrefter/leverer fonten.
+
+   (De tidligere Wix-fontene Questa Sans / DIN Next er dermed ute av bruk
+   — de var kommersielle og Wix-lisensen fulgte ikke med til egen side.)
+   ===================================================================== */
