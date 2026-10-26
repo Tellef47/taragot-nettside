@@ -13,16 +13,26 @@ window.addEventListener('scroll', function () {
 
 // Hamburgermeny (mobil)
 var menyKnapp = document.getElementById('meny-knapp');
-menyKnapp.addEventListener('click', function () {
-  var apen = nav.classList.toggle('nav--apen');
+function settMeny(apen) {
+  nav.classList.toggle('nav--apen', apen);
+  document.body.classList.toggle('meny-apen', apen);
   menyKnapp.setAttribute('aria-expanded', apen);
   menyKnapp.setAttribute('aria-label', apen ? 'Lukk meny' : 'Åpne meny');
+  if (apen) document.documentElement.style.setProperty('--meny-topp', (nav.getBoundingClientRect().bottom + 16) + 'px');
+  if (apen) { var forste = document.querySelector('#meny > a'); if (forste) forste.focus(); }
+}
+menyKnapp.addEventListener('click', function () {
+  settMeny(!nav.classList.contains('nav--apen'));
 });
 document.querySelectorAll('#meny a').forEach(function (a) {
-  a.addEventListener('click', function () {
-    nav.classList.remove('nav--apen');
-    menyKnapp.setAttribute('aria-expanded', 'false');
-  });
+  a.addEventListener('click', function () { settMeny(false); });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && nav.classList.contains('nav--apen')) { settMeny(false); menyKnapp.focus(); }
+});
+// Lukk menyen hvis vinduet blir bredt nok til vanlig meny
+window.addEventListener('resize', function () {
+  if (window.innerWidth > 767 && nav.classList.contains('nav--apen')) settMeny(false);
 });
 
 // Språkvelger

@@ -102,6 +102,19 @@ a:focus-visible, button:focus-visible {
 .sprak-liste a[aria-current="true"] { font-weight: 600; }
 .sprak-liste a[aria-current="true"]::after { content: " ✓"; }
 
+/* Ekstra innhold i mobilmenyen (språk og sosiale medier) – skjult på PC */
+.meny-mobil { display: none; }
+.sprak-mobil { margin: 0 0 28px; font-size: var(--t-meny); font-weight: 600; }
+.nav-lenker .sprak-mobil a {
+  font-weight: 400; text-transform: none;
+  text-decoration: underline; text-decoration-color: var(--aksent); text-underline-offset: 4px;
+}
+.meny-some { list-style: none; margin: 0; padding: 0; display: flex; gap: 28px; }
+.nav-lenker .meny-some a {
+  font-size: var(--t-liten); font-weight: 400; text-transform: none;
+  text-decoration: underline; text-decoration-color: var(--aksent); text-underline-offset: 4px;
+}
+
 .meny-knapp {
   display: none;
   width: 44px; height: 44px; border-radius: 50%;
@@ -297,16 +310,29 @@ footer {
   :root { --gutter: 16px; --t-h2-ny: 20px; --t-sidetittel-ny: 28px; --t-ingress: 19px; --seksjon-luft: 48px; }
 
   .nav { align-items: center; padding: 16px var(--gutter); }
+  /* Mobilmeny: dekker hele skjermen, store lenker.
+     Ligger bak logo og lukkeknapp (z-index -1 inne i headeren). */
   .nav-lenker {
-    display: none;
-    position: absolute; top: 100%; left: 0; right: 0;
-    flex-direction: column; align-items: flex-start; gap: 18px;
-    background: var(--bg); padding: 12px var(--gutter) 24px;
-    border-bottom: 1px solid var(--linje-sterk);
+    display: none; z-index: -1;
+    position: fixed; inset: 0;
+    flex-direction: column; align-items: flex-start; gap: 0;
+    background: var(--bg);
+    padding: var(--meny-topp, 136px) var(--gutter) 40px;
+    overflow-y: auto;
   }
   .nav--apen .nav-lenker { display: flex; }
-  .sprak-liste { position: static; margin-top: 8px; box-shadow: none; }
+  .nav-lenker > a {
+    font-size: var(--t-meny-stor); font-weight: 400; line-height: 1.15;
+    letter-spacing: 0.01em; padding: 10px 0;
+    text-decoration: underline; text-decoration-color: var(--aksent);
+    text-decoration-thickness: 1.5px; text-underline-offset: 8px;
+  }
+  .nav-lenker > a[aria-current="page"] { text-decoration-thickness: 3px; }
+  .nav-lenker > a:hover { opacity: .55; }
+  .sprakvelger { display: none; }
+  .meny-mobil { display: block; margin-top: 44px; }
   .meny-knapp { display: inline-flex; }
+  body.meny-apen { overflow: hidden; }
 
   .intro { padding: 28px var(--gutter) var(--seksjon-luft); }
   .intro h1 { font-size: 28px; }

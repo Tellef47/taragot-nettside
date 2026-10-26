@@ -51,6 +51,7 @@
   --t-seksjon:    36px;   /* seksjonsoverskrifter, store bokstaver (mobil: 22px) */
   --t-intro:      22px;   /* introteksten øverst (mobil: 19px) */
   --t-meny:       16px;
+  --t-meny-stor:  34px;   /* lenkene i mobilmenyen */
   --t-knapp:      15px;
   --t-liten:      14px;
   --t-caption:    12px;
