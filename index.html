@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>5b / Taragot — nettside (prototype)</title>
+  <title>Taragot Sounds</title>
 
-  <!-- Inter (gratis, Google Fonts/OFL) — valgt av designer 2026-09-15 for all
-       tekst. Logoen beholder serif (se --font-logo i tokens.css). -->
+  <!-- Inter (gratis, Google Fonts/OFL) brukes for all tekst, også logoen. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,12 +14,11 @@
   <link rel="stylesheet" href="tokens.css">
 
   <style>
-    /* --- Prototype-oppsett. Bruker KUN variablene fra tokens.css. ---------
-       Frittstående skisse (ingen database ennå). Endringer 2026-09-15 følger
-       designerens innspill mot dagens taragot.com. */
+    /* --- Oppsett. Bruker KUN variablene fra tokens.css. -------------------
+       Ny layout 2026-10-26 etter Mildrids skisser (PC + mobil). */
 
     * { box-sizing: border-box; }
-
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       background: var(--bg);
@@ -31,162 +29,271 @@
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
-
-    /* Tydelig merke om at dette er en prototype under arbeid. */
-    .proto-varsel {
-      background: var(--text);
-      color: var(--bg);
-      font-family: var(--font-meny);
-      font-size: var(--t-liten);
-      text-align: center;
-      padding: 8px 16px;
-      letter-spacing: 0.02em;
+    img { display: block; max-width: 100%; }
+    /* Tekst bare for skjermlesere */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap;
     }
 
-    /* --- Toppmeny: off-white, høyrestilte lenker, sticky ------------------ */
+    .proto-varsel {
+      background: var(--text); color: var(--bg);
+      font-family: var(--font-meny); font-size: var(--t-liten);
+      text-align: center; padding: 8px 16px; letter-spacing: 0.02em;
+    }
+
+    .innhold { padding: 0 var(--gutter); }
+    .skille { border: 0; border-top: 1px solid var(--linje-sterk); margin: 0 var(--gutter); }
+
+    /* Seksjonsoverskrifter: store bokstaver, vanlig vekt */
+    /* H2 – seksjonsoverskrift */
+    .tittel {
+      font-family: var(--font-overskrift);
+      font-size: var(--t-h2-ny); font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      line-height: 1.2; margin: 0;
+    }
+    /* H3 – underoverskrift inne i en seksjon */
+    .undertittel {
+      font-size: var(--t-meny); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin: 0;
+    }
+
+    /* Synlig tastaturfokus på alt som kan klikkes */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--text); outline-offset: 3px; border-radius: 4px;
+    }
+
+    /* --- Toppmeny -------------------------------------------------------- */
     .nav {
       position: sticky; top: 0; z-index: 50;
       background: var(--bg);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px var(--gutter);
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 22px var(--gutter) 18px;
       transition: transform .3s ease;
     }
     .nav--skjult { transform: translateY(-100%); }
-    .logo {
-      font-family: var(--font-logo);
-      color: var(--aksent);                 /* logo forblir oransje */
-      font-size: var(--t-h3);
-      letter-spacing: 0.02em;
-    }
-    .nav-hoyre { display: flex; align-items: center; gap: 26px; }
-    .nav-lenker { display: flex; gap: 26px; }
+
+    .logo { display: inline-block; }
+    .logo img { display: block; width: 97px; height: auto; }
+
+    .nav-lenker { display: flex; align-items: center; gap: clamp(28px, 6vw, 72px); padding-top: 14px; }
     .nav-lenker a, .sprak {
-      color: var(--text);                   /* svart tekst */
-      font-family: var(--font-meny);
-      font-size: var(--t-meny);
+      font-family: var(--font-meny); font-size: var(--t-meny); font-weight: 500;
+      text-transform: uppercase; color: var(--text);
       transition: opacity .15s ease;
     }
-    .nav-lenker a:hover, .sprak:hover { opacity: .45; }   /* blek/grå ved hover */
+    .nav-lenker a:hover, .sprak:hover { opacity: .45; }
     .sprak {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: none; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 4px;
+      background: none; border: none; padding: 0; cursor: pointer;
     }
-    .sprak svg { width: 17px; height: 17px; }
+    .sprak svg { width: 12px; height: 12px; transition: transform .15s ease; }
+    .sprak[aria-expanded="true"] svg { transform: rotate(180deg); }
+    .sprakvelger { position: relative; }
+    .sprak-liste {
+      position: absolute; right: 0; top: calc(100% + 10px); z-index: 60;
+      list-style: none; margin: 0; padding: 6px 0; min-width: 150px;
+      background: var(--bg-alt); border: 1px solid var(--linje); border-radius: 6px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.08);
+    }
+    .sprak-liste[hidden] { display: none; }
+    .nav-lenker .sprak-liste a {
+      display: block; padding: 9px 16px; text-transform: none; font-weight: 400;
+    }
+    .nav-lenker .sprak-liste a:hover { opacity: 1; background: var(--bg-alt-2); }
+    .sprak-liste a[aria-current="true"] { font-weight: 600; }
+    .sprak-liste a[aria-current="true"]::after { content: " ✓"; }
 
-    /* --- Hero / video: 55px sider, 40px topp/bunn, skjult i mobil --------- */
-    .hero { padding: 40px var(--gutter); }
-    .video {
-      width: 100%; aspect-ratio: 21 / 9;
-      background: #2C2C2A;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--bg);
+    .meny-knapp {
+      display: none;
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1.5px solid var(--aksent); background: none; color: var(--text);
+      align-items: center; justify-content: center; cursor: pointer; padding: 0;
     }
-    .video-note { font-family: var(--font-meny); font-size: var(--t-liten); opacity: .8; }
-    .video-play {
-      width: 54px; height: 54px; border-radius: 50%;
-      border: 1.5px solid var(--bg);
-      display: flex; align-items: center; justify-content: center; margin-right: 14px;
-    }
-    .video-play::before {
-      content: ""; border-left: 15px solid var(--bg);
-      border-top: 9px solid transparent; border-bottom: 9px solid transparent;
-      margin-left: 4px;
+    .meny-knapp svg { width: 22px; height: 22px; }
+    .meny-knapp .ikon-lukk, .nav--apen .meny-knapp .ikon-meny { display: none; }
+    .nav--apen .meny-knapp .ikon-lukk { display: block; }
+
+    /* --- Intro med lydbølge ---------------------------------------------- */
+    .intro { padding: 64px var(--gutter) 104px; }
+    .intro h1 {
+      margin: 0; max-width: 24ch;
+      font-size: var(--t-h1-ny); font-weight: 400; line-height: 1.2;
+      letter-spacing: -0.01em;
     }
 
-    /* --- Seksjoner -------------------------------------------------------- */
-    .seksjon { padding: 8px var(--gutter) 56px; }
-    .seksjon > h2 {
-      color: var(--text);                   /* overskrift svart */
-      font-family: var(--font-overskrift);
-      font-size: var(--t-h2); font-weight: 600;
-      margin: 24px 0 22px;
+    /* --- Nyeste utgivelser ----------------------------------------------- */
+    .utgivelser-topp { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
+    .pilknapper { display: none; gap: 10px; }
+    .pil {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1.5px solid var(--aksent); background: none; color: var(--text);
+      display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0;
+      transition: opacity .15s ease;
     }
-    .intro { max-width: 60ch; margin: 0 0 6px; }
+    .pil svg { width: 18px; height: 18px; }
+    .pil:disabled { opacity: .3; cursor: default; }
 
-    .kort-rad {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
-    }
-    .kort { color: inherit; }
+    .kort-rad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 24px; }
+    /* Utgivelser: oppfører seg som kort (hele flaten er klikkbar),
+       men uten ramme – bare cover og tekst. */
+    .kort { display: block; position: relative; border-radius: 4px; }
     .cover {
-      aspect-ratio: 1 / 1; background: var(--bg-alt);
-      border: 1px solid var(--linje);
+      position: relative; aspect-ratio: 1 / 1; overflow: hidden;
+      background: var(--bg-alt-2); border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
       text-align: center; padding: 12px;
-      color: var(--text-svak); font-family: var(--font-meny);
-      font-size: var(--t-caption); letter-spacing: .06em;
+      color: var(--text-svak-2); font-size: var(--t-caption);
     }
-    .kort h3 { font-size: var(--t-brod); font-weight: 500; margin: 14px 0 3px; }
-    .kort .meta { font-size: var(--t-liten); color: var(--text-svak); margin: 0; }
+    .cover img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      transition: transform .35s ease;
+    }
+    .kort:hover .cover img, .kort:focus-visible .cover img { transform: scale(1.03); }
+    .kort h3 {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
+      font-size: var(--t-meny); font-weight: 500; margin: 14px 0 2px; line-height: 1.3;
+    }
+    .kort .pil-ut { flex: none; font-weight: 400; color: var(--text-svak-2); transition: color .15s ease, transform .15s ease; }
+    .kort:hover .pil-ut, .kort:focus-visible .pil-ut { color: var(--text); transform: translate(2px, -2px); }
+    .kort .artist { font-size: var(--t-meny); color: var(--text-svak-2); margin: 0; line-height: 1.3; }
+    .kort .format { font-size: var(--t-caption); color: var(--text-svak-2); margin: 4px 0 0; }
 
-    /* --- Knapper: helt oransje, hvit fetere tekst, grå ved hover ---------- */
+    /* Rund knapp med oransje kant og pil */
     .knapp {
-      display: inline-block; cursor: pointer;
-      background: var(--aksent); color: #FFFFFF;
-      font-family: var(--font-meny); font-weight: 600; font-size: var(--t-meny);
-      border: none; border-radius: 8px; padding: 12px 26px;
-      transition: background .15s ease;
+      display: inline-flex; align-items: center; gap: 12px; cursor: pointer;
+      background: none; color: var(--text);
+      border: 1.5px solid var(--aksent); border-radius: 999px;
+      font-family: var(--font-meny); font-size: var(--t-knapp); font-weight: 500;
+      padding: 9px 14px 9px 13px;
+      transition: background .15s ease, color .15s ease;
     }
-    .knapp:hover { background: var(--knapp-hover); }
-    .midt { text-align: center; margin-top: 34px; }
+    .knapp svg { width: 16px; height: 16px; }
+    .knapp:hover { background: var(--bg-alt-2); }
+    /* Primærknapp – hovedhandlingen i en seksjon */
+    .knapp--primar { background: var(--aksent); border-color: var(--aksent); color: var(--text); font-weight: 600; }
+    .knapp--primar:hover { background: var(--text); border-color: var(--text); color: #FFFFFF; }
 
-    /* --- Nyhetsbrev: hvit rundet rute, rundet input, svarte konturer ------ */
-    .nyhetsbrev { text-align: center; }
-    .paamelding {
-      background: var(--bg-alt); border-radius: 16px;
-      max-width: 520px; margin: 6px auto 0; padding: 30px 28px;
-      display: flex; flex-direction: column; gap: 16px;
-    }
-    .paamelding input[type="email"] {
-      width: 100%; padding: 13px 15px;
-      border: 1.5px solid var(--linje-svart); border-radius: 10px;
-      font-family: var(--font-brodtekst); font-size: var(--t-meny);
-    }
-    .samtykke { display: flex; align-items: center; gap: 10px; font-size: var(--t-liten); text-align: left; }
-    .samtykke input {
-      width: 20px; height: 20px; flex: none;
-      border: 1.5px solid var(--linje-svart); appearance: none; border-radius: 4px;
-      cursor: pointer; display: inline-grid; place-content: center;
-    }
-    .samtykke input:checked { background: var(--aksent); border-color: var(--aksent); }
-    .samtykke input:checked::before { content: "✓"; color: #fff; font-size: 13px; }
+    .se-alle { margin: 46px 0 50px; }
 
-    /* --- Bunntekst: 55px, off-white, svart topplinje, oransje logo -------- */
+    /* --- Nyhetsbrev ------------------------------------------------------ */
+    .nyhetsbrev {
+      display: grid; grid-template-columns: 2fr 3fr; gap: 56px;
+      padding: 50px var(--gutter) 50px;
+    }
+    .nyhetsbrev .tittel { margin-bottom: 14px; }
+    .nyhetsbrev p { margin: 0; font-size: var(--t-meny); color: var(--text-svak-2); }
+    .felter { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .felt label { display: block; font-size: var(--t-liten); color: var(--text); margin-bottom: 6px; }
+    .nyhetsbrev .personvern { margin: 0 0 22px; }
+    .personvern { font-size: var(--t-liten); color: var(--text-svak-2); margin: 0 0 22px; }
+    .personvern a { text-decoration: underline; text-underline-offset: 3px; }
+    .felt input {
+      width: 100%; height: 48px; padding: 0 14px;
+      background: var(--bg-alt);
+      border: 1.5px solid var(--aksent); border-radius: 6px;
+      font-family: var(--font-brodtekst); font-size: var(--t-meny); color: var(--text);
+    }
+    .felt input:focus { outline: 2px solid var(--aksent); outline-offset: 1px; }
+    .takk { display: none; margin-top: 14px; font-size: var(--t-liten); }
+
+    /* --- Kontakt og følg oss --------------------------------------------- */
+    .kontakt { padding: 56px var(--gutter) 30px; }
+    .kontakt .tittel { margin-bottom: 44px; }
+    .personer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-bottom: 56px; }
+    .person span { display: block; font-size: var(--t-liten); color: var(--text-svak-2); margin-bottom: 6px; }
+
+    .lenke {
+      font-size: var(--t-meny);
+      text-decoration: underline; text-decoration-color: var(--aksent);
+      text-decoration-thickness: 1px; text-underline-offset: 4px;
+      transition: opacity .15s ease;
+    }
+    .lenke:hover { opacity: .55; }
+
+    .some { display: flex; gap: 44px; margin: 18px 0 60px; }
+
+    /* --- Bunntekst ------------------------------------------------------- */
     footer {
-      background: var(--bg);
-      border-top: 1px solid var(--linje-svart);   /* tynn svart linje på toppen */
-      padding: 36px var(--gutter) 56px;
-      display: flex; flex-wrap: wrap; gap: 28px;
-      justify-content: space-between; align-items: flex-start;
+      margin: 0 var(--gutter); padding: 40px 0 48px;
+      border-top: 1px solid var(--linje-sterk);
+      display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 20px;
+      font-size: var(--t-caption); color: var(--text-svak-2);
     }
-    .foot-kol { font-size: var(--t-liten); color: var(--text); line-height: 1.9; }
-    .foot-kol .logo { font-size: var(--t-h3); }
-    .some { display: flex; gap: 12px; margin-top: 6px; }
-    .some a {
-      width: 38px; height: 38px; border-radius: 50%;
-      background: var(--text); color: var(--bg);   /* svarte SoMe-knapper */
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 600; transition: opacity .15s ease;
-    }
-    .some a:hover { opacity: .55; }
+    footer .til-toppen { color: var(--text); }
 
     /* =====================================================================
-       RESPONSIVT — kortene går 4 → 3 → 2 → 1. Video skjules i mobil.
+       NETTBRETT — kortene i 2 rader à 4 blir 2 kolonner
        ===================================================================== */
-    @media (max-width: 900px) {
-      .kort-rad { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    @media (max-width: 1000px) {
+      .kort-rad { grid-template-columns: repeat(2, 1fr); }
+      .personer { grid-template-columns: repeat(2, 1fr); }
     }
+
+    /* =====================================================================
+       MOBIL — hamburgermeny, karusell, alt stablet
+       ===================================================================== */
     @media (max-width: 767px) {
-      :root { --gutter: 20px; }
-      .hero { display: none; }                      /* video fjernes i mobil */
-      .kort-rad { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .nav-lenker { gap: 16px; }
-      .seksjon > h2 { font-size: var(--t-h1); }
+      :root { --gutter: 16px; --t-h1-ny: 26px; --t-h2-ny: 20px; }
+
+      .nav { align-items: center; padding: 16px var(--gutter); }
+      .nav-lenker {
+        display: none;
+        position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; align-items: flex-start; gap: 18px;
+        background: var(--bg); padding: 12px var(--gutter) 24px;
+        border-bottom: 1px solid var(--linje-sterk);
+      }
+      .nav--apen .nav-lenker { display: flex; }
+      .sprak-liste { position: static; margin-top: 8px; box-shadow: none; }
+      .meny-knapp { display: inline-flex; }
+
+      .intro { padding: 24px var(--gutter) 48px; }
+
+      .utgivelser-topp { margin-bottom: 18px; }
+      .pilknapper { display: flex; }
+
+      /* Karusell: ett kort om gangen, neste kort titter fram */
+      .kort-rad {
+        display: flex; gap: 14px;
+        overflow-x: auto; scroll-snap-type: x mandatory;
+        margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter);
+        scroll-padding: 0 var(--gutter);
+        scrollbar-width: none;
+      }
+      .kort-rad::-webkit-scrollbar { display: none; }
+      .kort-rad { padding: 0 15%; scroll-padding: 0; gap: 16px; }
+      .kort {
+        flex: 0 0 70%; scroll-snap-align: center;
+        opacity: .4; transform: scale(.92); transform-origin: center top;
+        transition: opacity .25s ease, transform .25s ease;
+      }
+      .kort.fokus { opacity: 1; transform: none; }
+
+      .se-alle { margin: 30px 0 60px; }
+
+      .nyhetsbrev { grid-template-columns: 1fr; gap: 30px; padding: 36px var(--gutter) 50px; }
+      .nyhetsbrev .tittel { margin-bottom: 6px; }
+      .felter { grid-template-columns: 1fr; gap: 26px; margin-bottom: 34px; }
+
+      .kontakt { padding: 36px var(--gutter) 10px; }
+      .kontakt .tittel { margin-bottom: 22px; }
+      .personer { grid-template-columns: 1fr; gap: 26px; margin-bottom: 64px; }
+      .some { flex-direction: column; gap: 18px; margin: 16px 0 50px; }
+
+      footer {
+        grid-template-columns: 1fr auto; gap: 4px 20px; padding: 30px 0 40px;
+        font-size: var(--t-liten);
+      }
+      footer > div { grid-column: 1; }
+      footer .til-toppen { grid-column: 2; grid-row: 1; }
     }
-    @media (max-width: 360px) {
-      .kort-rad { grid-template-columns: 1fr; }
-    }
+
     @media (prefers-reduced-motion: reduce) {
-      .nav { transition: none; }
+      html { scroll-behavior: auto; }
+      .nav, .kort, .cover img { transition: none; }
     }
   </style>
 </head>
@@ -197,83 +304,234 @@
   </div>
 
   <header class="nav" id="nav">
-    <a class="logo" href="#">Taragot Sounds</a>
-    <div class="nav-hoyre">
-      <nav class="nav-lenker">
-        <a href="#katalog">katalog</a>
-        <a href="#">om oss</a>
-        <a href="#">kontakt</a>
-      </nav>
-      <button class="sprak" aria-label="Velg språk">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-          <circle cx="12" cy="12" r="9"></circle>
-          <path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"></path>
-        </svg>
-        NO
-      </button>
-    </div>
+    <a class="logo" href="#" aria-label="Taragot Sounds — til forsiden">
+      <img src="bilder/logo.png" alt="Taragot Sounds" width="97" height="80">
+    </a>
+
+    <nav class="nav-lenker" id="meny">
+      <a href="#utgivelser">Katalog</a>
+      <a href="#">Om oss</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="https://taragot.bandcamp.com/" target="_blank" rel="noopener">Bandcamp&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a>
+      <div class="sprakvelger" id="sprakvelger">
+        <button class="sprak" id="sprak-knapp" aria-haspopup="true" aria-expanded="false" aria-controls="sprak-liste">
+          <span class="sr-only">Språk: </span>NO
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+        </button>
+        <ul class="sprak-liste" id="sprak-liste" hidden>
+          <li><a href="#" lang="nb" aria-current="true">Norsk</a></li>
+          <li><a href="#" lang="en" hreflang="en">English</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <button class="meny-knapp" id="meny-knapp" aria-label="Åpne meny" aria-expanded="false" aria-controls="meny">
+      <svg class="ikon-meny" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="ikon-lukk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
   </header>
 
   <main>
-    <div class="hero">
-      <div class="video">
-        <div class="video-play" aria-hidden="true"></div>
-        <span class="video-note">Videokarusell — plassholder</span>
-      </div>
-    </div>
-
-    <section class="seksjon" id="katalog">
-      <p class="intro">Norsk plateselskap med en katalog bestående av skandinavisk
-        folkemusikk, fri improvisasjon og samtidsjazz.</p>
-      <h2>Nyeste utgivelser</h2>
-      <div class="kort-rad">
-        <a class="kort" href="#"><div class="cover">Song for Bird II</div><h3>Song for Bird II</h3><p class="meta">Knut Kvifte Nesheim · 2025</p></a>
-        <a class="kort" href="#"><div class="cover">Gangar etter Olav Dale</div><h3>Gangar etter Olav Dale</h3><p class="meta">Edén/Kvifte/Nesheim Trio · 2025</p></a>
-        <a class="kort" href="#"><div class="cover">Hamborg</div><h3>Hamborg</h3><p class="meta">Camilla Hole Trio · 2024</p></a>
-        <a class="kort" href="#"><div class="cover">Upstairs in a Tent</div><h3>Upstairs in a Tent</h3><p class="meta">Tellefs · 2024</p></a>
-      </div>
-      <div class="midt"><a class="knapp" href="#">Se alle utgivelser</a></div>
+    <section class="intro">
+      <h1>Norsk plateselskap med en katalog bestående av skandinavisk folkemusikk og
+        tradisjonsmusikk, fri improvisasjon og samtidsjazz.</h1>
     </section>
 
-    <section class="seksjon nyhetsbrev">
-      <h2>Abonner på vårt nyhetsbrev</h2>
-      <form class="paamelding" onsubmit="return false">
-        <input id="epost" type="email" placeholder="Din e-postadresse" />
-        <label class="samtykke"><input id="samtykke" type="checkbox" />
-          Ja, meld meg på nyhetsbrevet</label>
-        <button class="knapp" type="submit">Send inn</button>
+    <section class="innhold" id="utgivelser">
+      <div class="utgivelser-topp">
+        <h2 class="tittel">Nyeste utgivelser</h2>
+        <div class="pilknapper">
+          <button class="pil" id="pil-forrige" aria-label="Forrige utgivelse" disabled>
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 9H3M7.5 4.5 3 9l4.5 4.5"/></svg>
+          </button>
+          <button class="pil" id="pil-neste" aria-label="Neste utgivelse">
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h12M10.5 4.5 15 9l-4.5 4.5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Coverbilder ligger i bilder/covers/ (800×800 px, JPG).
+           Mangler et bilde, vises tittelen som plassholder. -->
+      <div class="kort-rad" id="kort-rad">
+        <a class="kort" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener"><div class="cover">Längs med gränsen<img src="bilder/covers/langs-med-gransen.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Längs med gränsen<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Mats Berglund Trio</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener"><div class="cover">Króta<img src="bilder/covers/krota.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Króta<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Edén/Kvifte/Nesheim Trio</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener"><div class="cover">Songs for Birds<img src="bilder/covers/songs-for-birds.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Songs for Birds<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Knut Kvifte Nesheim</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener"><div class="cover">Langs<img src="bilder/covers/langs.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Langs<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Camilla Hole Trio</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener"><div class="cover">Giulio<img src="bilder/covers/giulio.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Giulio<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Julius</p><p class="format">digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener"><div class="cover">Upstairs in a tent<img src="bilder/covers/upstairs-in-a-tent.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Upstairs in a tent<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Tellefs</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener"><div class="cover">MMXXIV<img src="bilder/covers/mmxxiv.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>MMXXIV<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Ånon Egeland</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener"><div class="cover">Trioliadam<img src="bilder/covers/trioliadam.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Trioliadam<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Frode Nyvold m/ venner</p><p class="format">LP, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+      </div>
+
+      <div class="se-alle">
+        <a class="knapp" href="#">Se alle utgivelser
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h12M10.5 4.5 15 9l-4.5 4.5"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <hr class="skille">
+
+    <section class="nyhetsbrev">
+      <div>
+        <h2 class="tittel">Nyhetsbrev</h2>
+        <p>Få siste nytt om våre artister og utgivelser!</p>
+      </div>
+      <form id="paamelding">
+        <div class="felter">
+          <div class="felt">
+            <label for="navn">Ditt navn*</label>
+            <input id="navn" type="text" autocomplete="name" required>
+          </div>
+          <div class="felt">
+            <label for="epost">Din e-post*</label>
+            <input id="epost" type="email" autocomplete="email" required>
+          </div>
+        </div>
+        <p class="personvern">Vi bruker e-posten din bare til nyhetsbrevet. Du kan melde deg av når som helst. <a href="#">Personvern</a></p>
+        <button class="knapp knapp--primar" type="submit">Meld på
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h12M10.5 4.5 15 9l-4.5 4.5"/></svg>
+        </button>
+        <p class="takk" id="takk" role="status"></p>
       </form>
+    </section>
+
+    <hr class="skille">
+
+    <section class="kontakt" id="kontakt">
+      <h2 class="tittel">Kontakt oss</h2>
+      <div class="personer">
+        <div class="person"><span>Generelle henvendelser</span><a class="lenke" href="mailto:post@taragot.no">post@taragot.no</a></div>
+        <div class="person"><span>Tellef Kvifte</span><a class="lenke" href="mailto:tellef@taragot.no">tellef@taragot.no</a></div>
+        <div class="person"><span>Guro Kvifte Nesheim</span><a class="lenke" href="mailto:guro@taragot.no">guro@taragot.no</a></div>
+        <div class="person"><span>Knut Kvifte Nesheim</span><a class="lenke" href="mailto:knut@taragot.no">knut@taragot.no</a></div>
+      </div>
+
+      <h3 class="undertittel">Følg oss</h3>
+      <div class="some">
+        <a class="lenke" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener">Bandcamp&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a>
+        <a class="lenke" href="https://www.instagram.com/taragotsounds/" target="_blank" rel="noopener">Instagram&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a>
+        <a class="lenke" href="https://www.facebook.com/taragotsounds" target="_blank" rel="noopener">Facebook&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a>
+      </div>
     </section>
   </main>
 
   <footer>
-    <div class="foot-kol">
-      <a class="logo" href="#">Taragot Sounds</a>
-      <div style="margin-top:10px">Oslo, Norge</div>
-      <div>post@taragot.no</div>
-    </div>
-    <div class="foot-kol">
-      Katalog<br>Om oss<br>Kontakt
-    </div>
-    <div class="foot-kol">
-      Følg oss
-      <div class="some">
-        <a href="#" aria-label="Facebook">f</a>
-        <a href="#" aria-label="Instagram">ig</a>
-        <a href="#" aria-label="Bandcamp">bc</a>
-      </div>
-    </div>
+    <div>© 2026 Taragot Sounds</div>
+    <div>Org. nr. 997 677 897</div>
+    <div>Skedsmogata 5, 0655 Oslo</div>
+    <a class="lenke til-toppen" href="#">Til toppen&nbsp;↑</a>
   </footer>
 
   <script>
+    // Meny skjules når man scroller ned, vises når man scroller opp
     var nav = document.getElementById('nav');
     var sisteY = window.scrollY;
     window.addEventListener('scroll', function () {
       var y = window.scrollY;
-      if (y > sisteY && y > 90) nav.classList.add('nav--skjult');
+      if (y > sisteY && y > 90 && !nav.classList.contains('nav--apen')) nav.classList.add('nav--skjult');
       else nav.classList.remove('nav--skjult');
       sisteY = y;
     }, { passive: true });
+
+    // Hamburgermeny (mobil)
+    var menyKnapp = document.getElementById('meny-knapp');
+    menyKnapp.addEventListener('click', function () {
+      var apen = nav.classList.toggle('nav--apen');
+      menyKnapp.setAttribute('aria-expanded', apen);
+      menyKnapp.setAttribute('aria-label', apen ? 'Lukk meny' : 'Åpne meny');
+    });
+    document.querySelectorAll('#meny a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        nav.classList.remove('nav--apen');
+        menyKnapp.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+
+    // Språkvelger
+    var sprakKnapp = document.getElementById('sprak-knapp');
+    var sprakListe = document.getElementById('sprak-liste');
+    function lukkSprak() { sprakListe.hidden = true; sprakKnapp.setAttribute('aria-expanded', 'false'); }
+    sprakKnapp.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var apen = sprakListe.hidden;
+      sprakListe.hidden = !apen;
+      sprakKnapp.setAttribute('aria-expanded', apen);
+      if (apen) sprakListe.querySelector('a').focus();
+    });
+    document.addEventListener('click', function (e) {
+      if (!document.getElementById('sprakvelger').contains(e.target)) lukkSprak();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !sprakListe.hidden) { lukkSprak(); sprakKnapp.focus(); }
+    });
+
+    // Karusell (mobil): kortet nærmest midten får fokus
+    var rad = document.getElementById('kort-rad');
+    var kortene = Array.prototype.slice.call(rad.querySelectorAll('.kort'));
+    var forrige = document.getElementById('pil-forrige');
+    var neste = document.getElementById('pil-neste');
+    var aktiv = 0;
+    function erKarusell() { return getComputedStyle(rad).display === 'flex'; }
+    function finnAktiv() {
+      var midt = rad.scrollLeft + rad.clientWidth / 2, best = 0, avstand = Infinity;
+      kortene.forEach(function (k, i) {
+        var d = Math.abs(k.offsetLeft + k.offsetWidth / 2 - midt);
+        if (d < avstand) { avstand = d; best = i; }
+      });
+      return best;
+    }
+    function oppdater() {
+      aktiv = erKarusell() ? finnAktiv() : -1;
+      kortene.forEach(function (k, i) { k.classList.toggle('fokus', i === aktiv); });
+      forrige.disabled = aktiv <= 0;
+      neste.disabled = aktiv >= kortene.length - 1;
+    }
+    function gaaTil(i) {
+      var k = kortene[i];
+      rad.scrollTo({ left: k.offsetLeft - (rad.clientWidth - k.offsetWidth) / 2, behavior: 'smooth' });
+    }
+    forrige.addEventListener('click', function () { if (aktiv > 0) gaaTil(aktiv - 1); });
+    neste.addEventListener('click', function () { if (aktiv < kortene.length - 1) gaaTil(aktiv + 1); });
+    var venter = false;
+    rad.addEventListener('scroll', function () {
+      if (venter) return; venter = true;
+      requestAnimationFrame(function () { oppdater(); venter = false; });
+    }, { passive: true });
+    window.addEventListener('resize', oppdater);
+    oppdater();
+
+    // Nyhetsbrev → 5b CRM.
+    // CRM_ADRESSE fylles inn når crm.5b.no har et åpent mottak for påmeldinger.
+    // Skjemaet sender da JSON: { navn, epost, kilde: "nettside" }.
+    var CRM_ADRESSE = '';
+    var skjema = document.getElementById('paamelding');
+    var takk = document.getElementById('takk');
+    skjema.addEventListener('submit', function (e) {
+      e.preventDefault();
+      takk.style.display = 'block';
+      if (!CRM_ADRESSE) {
+        takk.textContent = 'Takk! (Påmeldingen er ikke koblet til CRM-et ennå.)';
+        return;
+      }
+      takk.textContent = 'Sender …';
+      fetch(CRM_ADRESSE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          navn: document.getElementById('navn').value,
+          epost: document.getElementById('epost').value,
+          kilde: 'nettside'
+        })
+      }).then(function (svar) {
+        if (!svar.ok) throw new Error(svar.status);
+        takk.textContent = 'Takk! Du er nå påmeldt nyhetsbrevet.';
+        skjema.reset();
+      }).catch(function () {
+        takk.textContent = 'Noe gikk galt. Prøv igjen, eller send en e-post til post@taragot.no.';
+      });
+    });
   </script>
 
 </body>

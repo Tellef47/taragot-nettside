@@ -12,7 +12,8 @@
 
   /* --- FARGER ------------------------------------------------------- */
   --bg:        #FCFCFB;   /* sidebakgrunn (off-white) — navbar, hero, footer */
-  --bg-alt:    #FFFFFF;   /* hvite kort/ruter (nyhetsbrev) */
+  --bg-alt:    #FFFFFF;   /* hvite kort/ruter (utgivelser, skjemafelt) */
+  --bg-alt-2:  #F1F0EC;   /* plassholder bak coverbilder */
   --text:      #000000;   /* all tekst helt svart (designer 2026-09-15) */
   --text-svak: #8F8F8F;   /* sekundær tekst / metadata (grå) */
   --text-svak-2: #646464; /* mørkere grå variant */
@@ -20,8 +21,9 @@
   --linje-sterk: #B0B0B0; /* tydeligere linjer */
   --linje-svart: #000000; /* svarte konturer: input, footer-topplinje */
 
-  --aksent:       #EA854C;  /* ORANSJE — bekreftet av designer 2026-09-15
-                               (logo + knapper). Wix-tema color_18.        */
+  --aksent:       #F05923;  /* ORANSJE — sterkere oransje fra Mildrids skisse
+                               2026-10-26 (var #EA854C). Logo, lydbølge,
+                               kortkanter, knapper, skjemafelt, understrek. */
   --knapp-hover:  #A6A6A6;  /* grå ved hover på knapper (designer)         */
 
   /* --- FONTER -------------------------------------------------------
@@ -29,7 +31,7 @@
      en serif. Inter er gratis (Google Fonts, OFL). Den endelige serifen
      til logoen avklares med designer — inntil da generisk serif-fallback. */
 
-  --font-logo:      Georgia, "Times New Roman", serif;     /* kun logo/wordmark */
+  --font-logo:      "Inter", system-ui, -apple-system, sans-serif; /* logo i Inter, store bokstaver (skisse 2026-10-26) */
   --font-overskrift: "Inter", system-ui, -apple-system, sans-serif;
   --font-brodtekst:  "Inter", system-ui, -apple-system, sans-serif;
   --font-meny:       "Inter", system-ui, -apple-system, sans-serif;
@@ -41,13 +43,18 @@
   --t-h2:         40px;
   --t-h3:         24px;
   --t-brod:       18px;
+  --t-h1-ny:      40px;   /* H1: introsetningen (mobil: 26px) */
+  --t-h2-ny:      26px;   /* H2: seksjonsoverskrifter (mobil: 20px) */
+  --t-seksjon:    36px;   /* seksjonsoverskrifter, store bokstaver (mobil: 22px) */
+  --t-intro:      22px;   /* introteksten øverst (mobil: 19px) */
   --t-meny:       16px;
+  --t-knapp:      15px;
   --t-liten:      14px;
   --t-caption:    12px;
   --linjehoyde:   1.4;
 
   /* --- LAYOUT -------------------------------------------------------- */
-  --gutter:       55px;   /* sidemarginal på desktop (designer)          */
+  --gutter:       40px;   /* sidemarginal på desktop (mobil: 16px)       */
 
 }
 
@@ -57,9 +64,8 @@
    Designer valgte Inter til all tekst (2026-09-15). Inter er gratis
    (Google Fonts / OFL) — fri å selvhoste, ingen lisenshake.
 
-   Logoen «Taragot Sounds» beholder en serif (--font-logo). Hvilken
-   eksakt serif taragot.com bruker er ikke fastslått ennå; prototypen
-   viser en generisk serif inntil designer bekrefter/leverer fonten.
+   Fra 2026-10-26 (Mildrids skisse) er også logoen i Inter, med store
+   bokstaver og en liten «lydbølge» under. Tidligere sto det en serif her.
 
    (De tidligere Wix-fontene Questa Sans / DIN Next er dermed ute av bruk
    — de var kommersielle og Wix-lisensen fulgte ikke med til egen side.)
