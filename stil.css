@@ -260,14 +260,19 @@ a:focus-visible, button:focus-visible {
 
 /* --- Footer ------------------------------------------------------------ */
 footer {
-  margin: 0 var(--gutter); padding: 56px 0 32px;
+  margin: 0 var(--gutter); padding: var(--seksjon-luft) 0 32px;
   border-top: 1px solid var(--linje-sterk);
   font-size: var(--t-liten); color: var(--text);
 }
-.footer-topp { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; padding-bottom: 56px; }
+/* Kontakt oss er første del av footeren, med samme oppbygging som
+   seksjonene over: tittel til venstre, innhold til høyre. */
+.footer-kontakt { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; padding-bottom: 64px; }
+.footer-kontakt .tittel { margin-bottom: 12px; }
+.footer-topp { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; padding-bottom: 48px; }
 .footer-topp img { width: 72px; height: auto; }
+.footer-innhold { display: grid; grid-template-columns: 1.2fr 2.2fr; gap: 24px; }
 .footer-kol h3 {
-  margin: 0 0 12px; font-size: var(--t-caption); font-weight: 600;
+  margin: 0 0 10px; font-size: var(--t-caption); font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-svak-2);
 }
 .footer-kol p, .footer-kol ul { margin: 0; padding: 0; list-style: none; line-height: 1.9; }
@@ -340,8 +345,9 @@ footer {
   .folk { grid-template-columns: 1fr; gap: 40px; }
 
   footer { padding: 48px 0 28px; }
-  .footer-topp { grid-template-columns: 1fr 1fr; gap: 32px 20px; padding-bottom: 40px; }
-  .footer-topp .footer-logo { grid-column: 1 / -1; }
+  .footer-kontakt { grid-template-columns: 1fr; gap: 20px; padding-bottom: 32px; }
+  .footer-topp { grid-template-columns: 1fr; gap: 32px; padding-bottom: 40px; }
+  .footer-innhold { grid-template-columns: 1fr 1fr; gap: 20px; }
   .footer-bunn { flex-direction: column; gap: 4px; }
 }
 
