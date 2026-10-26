@@ -115,8 +115,8 @@ a:focus-visible, button:focus-visible {
 /* --- Forside: intro ---------------------------------------------------- */
 .intro { padding: 72px var(--gutter) var(--seksjon-luft); }
 .intro h1 {
-  margin: 0; max-width: 20em;
-  font-size: clamp(40px, 4.2vw, 60px); font-weight: 400;
+  margin: 0; max-width: 23em;
+  font-size: clamp(34px, 3.4vw, 46px); font-weight: 400;
   line-height: 1.15; letter-spacing: -0.015em;
 }
 
