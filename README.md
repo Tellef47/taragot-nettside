@@ -4,9 +4,16 @@ Offentlig nettside for plateselskapet **5b / Taragot** — frittstående prototy
 i ren HTML/CSS.
 
 ## Filer
-- `index.html` — forsida. Struktur + layout-CSS.
+- `index.html` — forsida.
+- `katalog.html` — alle utgivelser.
+- `om-oss.html` — om selskapet og menneskene bak.
+- `stil.css` — felles oppsett for alle sidene (meny, seksjoner, kort, footer).
+- `felles.js` — felles oppførsel: meny, språkvelger, karusell, nyhetsbrev.
 - `tokens.css` — designtokens: farger, fonter og størrelser som CSS-variabler.
   Her endrer man uttrykket uten å røre resten.
+- `bilder/` — logo, coverbilder (`bilder/covers/`) og bilder til Om oss (`bilder/om-oss/`).
+
+Toppmeny og footer står i hver side. Endres de, må alle tre sidene oppdateres.
 
 Fonten **Inter** (gratis, Google Fonts) brukes for all tekst.
 

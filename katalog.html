@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog — Taragot Sounds</title>
+  <meta name="description" content="Alle utgivelser fra Taragot Sounds.">
+
+  <!-- Inter (gratis, Google Fonts/OFL) brukes for all tekst. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- tokens.css: farger, fonter og størrelser. stil.css: felles oppsett for alle sider. -->
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="stil.css">
+</head>
+<body>
+
+  <div class="proto-varsel">
+    PROTOTYPE — under arbeid. Dette er en skisse av den nye nettsiden.
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="logo" href="index.html" aria-label="Taragot Sounds — til forsiden">
+      <img src="bilder/logo.png" alt="Taragot Sounds" width="97" height="80">
+    </a>
+
+    <nav class="nav-lenker" id="meny" aria-label="Hovedmeny">
+      <a href="katalog.html" aria-current="page">Katalog</a>
+      <a href="om-oss.html">Om oss</a>
+      <a href="index.html#kontakt">Kontakt</a>
+      <a href="https://taragot.bandcamp.com/" target="_blank" rel="noopener">Bandcamp&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a>
+      <div class="sprakvelger" id="sprakvelger">
+        <button class="sprak" id="sprak-knapp" aria-haspopup="true" aria-expanded="false" aria-controls="sprak-liste">
+          <span class="sr-only">Språk: </span>NO
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+        </button>
+        <ul class="sprak-liste" id="sprak-liste" hidden>
+          <li><a href="#" lang="nb" aria-current="true">Norsk</a></li>
+          <li><a href="#" lang="en" hreflang="en">English</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <button class="meny-knapp" id="meny-knapp" aria-label="Åpne meny" aria-expanded="false" aria-controls="meny">
+      <svg class="ikon-meny" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="ikon-lukk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <section class="sidetopp">
+      <h1 class="sidetittel">Katalog</h1>
+      <p class="sideingress">Alle våre utgivelser er tilgjengelige på alle strømmetjenester, og kan kjøpes både digitalt og fysisk på
+        <a class="lenke" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener" style="font-size:inherit">Bandcamp&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a>.</p>
+    </section>
+
+    <section class="innhold katalog" aria-label="Utgivelser">
+      <!-- Utgivelsene er hentet fra taragot.bandcamp.com/music (nyeste først).
+           De 8 første coverne ligger i bilder/covers/, resten hentes fra Bandcamp. -->
+      <div class="kort-rad">
+        <a class="kort" href="https://taragot.bandcamp.com/album/l-ngs-med-gr-nsen" target="_blank" rel="noopener"><div class="cover">Längs med gränsen<img src="bilder/covers/langs-med-gransen.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Längs med gränsen<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Mats Berglund Trio</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/kr-ta" target="_blank" rel="noopener"><div class="cover">Króta<img src="bilder/covers/krota.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Króta<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Edén/Kvifte/Nesheim Trio</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://knutkviftenesheim.bandcamp.com/album/songs-for-birds" target="_blank" rel="noopener"><div class="cover">Songs for Birds<img src="bilder/covers/songs-for-birds.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Songs for Birds<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Knut Kvifte Nesheim</p><p class="format">digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://camillaholetrio.bandcamp.com/album/langs" target="_blank" rel="noopener"><div class="cover">Langs<img src="bilder/covers/langs.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Langs<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Camilla Hole Trio</p><p class="format">LP, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/track/giulio" target="_blank" rel="noopener"><div class="cover">Giulio<img src="bilder/covers/giulio.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Giulio<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Julius</p><p class="format">digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://tellefkvifte.bandcamp.com/album/upstairs-in-a-tent" target="_blank" rel="noopener"><div class="cover">Upstairs in a tent<img src="bilder/covers/upstairs-in-a-tent.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Upstairs in a tent<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Tellefs</p><p class="format">digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/non-egeland-mmxxiv" target="_blank" rel="noopener"><div class="cover">MMXXIV<img src="bilder/covers/mmxxiv.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>MMXXIV<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Ånon Egeland</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/trioliadam" target="_blank" rel="noopener"><div class="cover">Trioliadam<img src="bilder/covers/trioliadam.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Trioliadam<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Frode Nyvold m/ venner</p><p class="format">LP, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/kystn-rt" target="_blank" rel="noopener"><div class="cover">Kystnært<img src="https://f4.bcbits.com/img/a4207098343_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Kystnært<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Guro Kvifte Nesheim &amp; Floating Sofa Quartet</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/spoler-bakover-live" target="_blank" rel="noopener"><div class="cover">Rolf Roys spoler bakover<img src="https://f4.bcbits.com/img/a2708179920_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Rolf Roys spoler bakover<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Rolf Roys</p><p class="format">digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://tellefkvifte.bandcamp.com/track/en-rose-er-utsprungen" target="_blank" rel="noopener"><div class="cover">En rose er utsprungen<img src="https://f4.bcbits.com/img/a0717562701_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>En rose er utsprungen<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Guro Kvifte Nesheim &amp; Tellef Kvifte</p><p class="format">digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/talende-strenger-kertovat-kielet" target="_blank" rel="noopener"><div class="cover">Talende strenger / Kertovat Kielet<img src="https://f4.bcbits.com/img/a2435541162_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Talende strenger / Kertovat Kielet<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Knudsen &amp; Syrjälä</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://camillaholetrio.bandcamp.com/album/eventyrferd" target="_blank" rel="noopener"><div class="cover">Eventyrferd<img src="https://f4.bcbits.com/img/a1574278814_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Eventyrferd<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Camilla Hole Trio (Feat. Sigrid Moldestad &amp; Torstein Slåen)</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://knutkviftenesheim.bandcamp.com/album/graosido" target="_blank" rel="noopener"><div class="cover">Graosido<img src="https://f4.bcbits.com/img/a3459170410_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Graosido<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Knut Kvifte Nesheim &amp; OJKOS</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://tellefkvifte.bandcamp.com/album/reel-date" target="_blank" rel="noopener"><div class="cover">Reel Date<img src="https://f4.bcbits.com/img/a0718654824_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Reel Date<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Tellefs</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/micho-russell-in-norway-1978-vol-2-private-sessions" target="_blank" rel="noopener"><div class="cover">Micho Russell in Norway 1978, Vol 2: Private Sessions<img src="https://f4.bcbits.com/img/a2401048465_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Micho Russell in Norway 1978, Vol 2: Private Sessions<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Micho Russell</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://tellefkvifte.bandcamp.com/album/the-norwegian-bagpipe-vol-2" target="_blank" rel="noopener"><div class="cover">The Norwegian bagpipe (?) vol 2<img src="https://f4.bcbits.com/img/a2440362928_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>The Norwegian bagpipe (?) vol 2<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Tellef Kvifte</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/non-ii" target="_blank" rel="noopener"><div class="cover">Ånon II<img src="https://f4.bcbits.com/img/a0663586310_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Ånon II<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Ånon Egeland</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://matseden.bandcamp.com/album/wind-water-strings-bow" target="_blank" rel="noopener"><div class="cover">Wind, Water, Strings, Bow<img src="https://f4.bcbits.com/img/a1582109960_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Wind, Water, Strings, Bow<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Edén/Østersjö</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://johannesfossesolvangcamillahole.bandcamp.com/album/miniatyrland" target="_blank" rel="noopener"><div class="cover">Miniatyrland<img src="https://f4.bcbits.com/img/a1028062895_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Miniatyrland<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Johannes Fosse Solvang &amp; Camilla Hole (feat. OJKOS)</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://bearbrother.bandcamp.com/album/played-freely-with-power-and-emotion" target="_blank" rel="noopener"><div class="cover">Played Freely with Power and Emotion<img src="https://f4.bcbits.com/img/a1559836562_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Played Freely with Power and Emotion<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Bear Brother (feat. Mats Äleklint)</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://doomsdaypreppers.bandcamp.com/album/2020" target="_blank" rel="noopener"><div class="cover">2020<img src="https://f4.bcbits.com/img/a2711487856_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>2020<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Doomsday Preppers</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://matseden.bandcamp.com/album/alvaleken" target="_blank" rel="noopener"><div class="cover">Alvaleken<img src="https://f4.bcbits.com/img/a4048434419_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Alvaleken<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Mats Edén</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://oyvindbraekke.bandcamp.com/album/aller-anfang-ist-schwer" target="_blank" rel="noopener"><div class="cover">Aller Anfang ist schwer<img src="https://f4.bcbits.com/img/a2932609557_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Aller Anfang ist schwer<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Øyvind Brække</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://skrekkogguro.bandcamp.com/album/kjepphest" target="_blank" rel="noopener"><div class="cover">Kjepphest<img src="https://f4.bcbits.com/img/a4138852514_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Kjepphest<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Skrekk &amp; Guro</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://knutkviftenesheim.bandcamp.com/album/deliverables" target="_blank" rel="noopener"><div class="cover">Deliverables<img src="https://f4.bcbits.com/img/a3915873524_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Deliverables<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Knut Kvifte Nesheim</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://anonegelandmikaelmarin.bandcamp.com/album/farvel-farvel" target="_blank" rel="noopener"><div class="cover">Farvel Farvel<img src="https://f4.bcbits.com/img/a4098055538_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Farvel Farvel<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Ånon Egeland &amp; Mikael Marin</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://gkn5.bandcamp.com/album/tri-hjarter-p-ei-snor" target="_blank" rel="noopener"><div class="cover">Tri hjarter på ei snor<img src="https://f4.bcbits.com/img/a3795040124_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Tri hjarter på ei snor<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">GKN5</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://nesheimeden.bandcamp.com/album/den-kaldsteikte" target="_blank" rel="noopener"><div class="cover">Den Kaldsteikte<img src="https://f4.bcbits.com/img/a2440311188_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Den Kaldsteikte<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Guro Kvifte Nesheim &amp; Mats Edén</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://mikaelmarin.bandcamp.com/album/back-to-the-electric-roots" target="_blank" rel="noopener"><div class="cover">Back to the Electric Roots<img src="https://f4.bcbits.com/img/a2611851083_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Back to the Electric Roots<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Mikael Marin</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/egeland-spiller-fjeldstad" target="_blank" rel="noopener"><div class="cover">Egeland spiller Fjeldstad<img src="https://f4.bcbits.com/img/a1615545254_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Egeland spiller Fjeldstad<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Ånon Egeland</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://benreddik.bandcamp.com/album/kolibrikamikaze" target="_blank" rel="noopener"><div class="cover">Kolibrikamikaze<img src="https://f4.bcbits.com/img/a1771132899_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Kolibrikamikaze<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">BenReddik</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://flottorpsolberg.bandcamp.com/album/heimespel" target="_blank" rel="noopener"><div class="cover">Heimespel<img src="https://f4.bcbits.com/img/a3099813508_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Heimespel<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Johanne Flottorp &amp; Åsmund Løvland Solberg</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/looped-corn-fields" target="_blank" rel="noopener"><div class="cover">Looped Corn Fields<img src="https://f4.bcbits.com/img/a3805902989_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Looped Corn Fields<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Per Brehmer</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/h-sl-tten" target="_blank" rel="noopener"><div class="cover">Håslåtten<img src="https://f4.bcbits.com/img/a1950227057_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Håslåtten<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Per Midtstigen</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/egeland-ed-n-marin-vol-1" target="_blank" rel="noopener"><div class="cover">Egeland, Edén, Marin - Vol. 1<img src="https://f4.bcbits.com/img/a0263381165_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Egeland, Edén, Marin - Vol. 1<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Ånon Egeland, Mats Edén, Mikael Marin</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://camillaholetrio.bandcamp.com/album/halvem-l" target="_blank" rel="noopener"><div class="cover">Halvemål<img src="https://f4.bcbits.com/img/a0503470878_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Halvemål<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Camilla Hole trio with Fredrik Luhr Dietrichson and Knut Kvifte Nesheim</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://doomsdaypreppers.bandcamp.com/album/helter-shelter" target="_blank" rel="noopener"><div class="cover">Helter Shelter<img src="https://f4.bcbits.com/img/a4030956407_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Helter Shelter<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Doomsday Preppers</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://skrekkogguro.bandcamp.com/album/folkemusikk-20" target="_blank" rel="noopener"><div class="cover">Folkemusikk 2.0<img src="https://f4.bcbits.com/img/a0469650929_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Folkemusikk 2.0<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Skrekk &amp; Guro</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/micho-in-norway-vol-1" target="_blank" rel="noopener"><div class="cover">Micho in Norway, Vol 1<img src="https://f4.bcbits.com/img/a1706469733_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Micho in Norway, Vol 1<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Micho Russell</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/kemals-barbershop" target="_blank" rel="noopener"><div class="cover">Kemal's Barbershop<img src="https://f4.bcbits.com/img/a1220960634_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Kemal's Barbershop<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Gadjos</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://gkn5.bandcamp.com/album/bestastovo" target="_blank" rel="noopener"><div class="cover">Bestastovo<img src="https://f4.bcbits.com/img/a1074275492_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Bestastovo<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">GKN5</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://knutkviftenesheim.bandcamp.com/album/results" target="_blank" rel="noopener"><div class="cover">RESULTS<img src="https://f4.bcbits.com/img/a0368509453_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>RESULTS<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Knut Kvifte Nesheim</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://anonegelandmikaelmarin.bandcamp.com/album/sorpesoll" target="_blank" rel="noopener"><div class="cover">Sorpesoll<img src="https://f4.bcbits.com/img/a3333873756_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Sorpesoll<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Ånon Egeland and Mikael Marin</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://tellefkvifte.bandcamp.com/album/art-metal" target="_blank" rel="noopener"><div class="cover">Art Metal<img src="https://f4.bcbits.com/img/a2628909966_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Art Metal<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Tellef Kvifte</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://benreddik.bandcamp.com/album/festen-i-det-gule-huset" target="_blank" rel="noopener"><div class="cover">Festen i det gule huset<img src="https://f4.bcbits.com/img/a2856633947_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Festen i det gule huset<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">BenReddik m/Bjergsted Jazzensemble</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/rauland-rambles" target="_blank" rel="noopener"><div class="cover">Rauland Rambles<img src="https://f4.bcbits.com/img/a4044000957_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Rauland Rambles<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Bruce Molsky, Artu Järvelä, Ånon Egeland</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://tellefkvifte.bandcamp.com/album/tellefs-sj-fl-yte" target="_blank" rel="noopener"><div class="cover">Tellefs sjøfløyte<img src="https://f4.bcbits.com/img/a0339841250_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Tellefs sjøfløyte<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Tellef Kvifte</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://tellefkvifte.bandcamp.com/album/the-norwegian-bagpipe" target="_blank" rel="noopener"><div class="cover">The Norwegian bagpipe - ?<img src="https://f4.bcbits.com/img/a2487320340_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>The Norwegian bagpipe - ?<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Tellef Kvifte</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+        <a class="kort" href="https://taragot.bandcamp.com/album/lamsl-tt" target="_blank" rel="noopener"><div class="cover">Lamslått<img src="https://f4.bcbits.com/img/a0506610431_16.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Lamslått<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Guro Kvifte Nesheim, Thomas Eriksson</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
+      </div>
+    </section>
+
+  </main>
+
+    <footer>
+    <div class="footer-topp">
+      <div class="footer-kol footer-logo"><img src="bilder/logo.png" alt="Taragot Sounds" width="72" height="59"></div>
+      <div class="footer-kol">
+        <h3>Adresse</h3>
+        <p>Skedsmogata 5<br>0655 Oslo</p>
+      </div>
+      <div class="footer-kol">
+        <h3>Følg oss</h3>
+        <ul>
+          <li><a class="lenke" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener">Bandcamp&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a></li>
+          <li><a class="lenke" href="https://www.instagram.com/taragotsounds/" target="_blank" rel="noopener">Instagram&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a></li>
+          <li><a class="lenke" href="https://www.facebook.com/taragotsounds" target="_blank" rel="noopener">Facebook&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bunn">
+      <span>© 2026 Taragot Sounds · Org. nr. 997 677 897</span>
+      <a class="lenke til-toppen" href="#">Til toppen&nbsp;↑</a>
+    </div>
+  </footer>
+
+  <script src="felles.js"></script>
+
+</body>
+</html>

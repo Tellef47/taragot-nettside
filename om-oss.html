@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Om oss — Taragot Sounds</title>
+  <meta name="description" content="Taragot Sounds er et uavhengig norsk plateselskap etablert i 2014.">
+
+  <!-- Inter (gratis, Google Fonts/OFL) brukes for all tekst. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- tokens.css: farger, fonter og størrelser. stil.css: felles oppsett for alle sider. -->
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="stil.css">
+</head>
+<body>
+
+  <div class="proto-varsel">
+    PROTOTYPE — under arbeid. Dette er en skisse av den nye nettsiden.
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="logo" href="index.html" aria-label="Taragot Sounds — til forsiden">
+      <img src="bilder/logo.png" alt="Taragot Sounds" width="97" height="80">
+    </a>
+
+    <nav class="nav-lenker" id="meny" aria-label="Hovedmeny">
+      <a href="katalog.html">Katalog</a>
+      <a href="om-oss.html" aria-current="page">Om oss</a>
+      <a href="index.html#kontakt">Kontakt</a>
+      <a href="https://taragot.bandcamp.com/" target="_blank" rel="noopener">Bandcamp&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a>
+      <div class="sprakvelger" id="sprakvelger">
+        <button class="sprak" id="sprak-knapp" aria-haspopup="true" aria-expanded="false" aria-controls="sprak-liste">
+          <span class="sr-only">Språk: </span>NO
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg>
+        </button>
+        <ul class="sprak-liste" id="sprak-liste" hidden>
+          <li><a href="#" lang="nb" aria-current="true">Norsk</a></li>
+          <li><a href="#" lang="en" hreflang="en">English</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <button class="meny-knapp" id="meny-knapp" aria-label="Åpne meny" aria-expanded="false" aria-controls="meny">
+      <svg class="ikon-meny" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="ikon-lukk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <section class="sidetopp">
+      <h1 class="sidetittel">Om oss</h1>
+    </section>
+
+    <!-- Fellesbilde: legg bildet i bilder/om-oss/felles.jpg (helst minst 2000 px bredt). -->
+    <figure class="fellesbilde">
+      <div class="bilde-plass">Fellesbilde<img src="bilder/om-oss/felles.jpg" alt="Tellef Kvifte, Guro Kvifte Nesheim og Knut Kvifte Nesheim" onerror="this.remove()"></div>
+      <figcaption>Tellef Kvifte, Guro Kvifte Nesheim og Knut Kvifte Nesheim.</figcaption>
+    </figure>
+
+    <section class="to-kol">
+      <div>
+        <h2 class="tittel">Historien</h2>
+      </div>
+      <div class="brodtekst">
+        <p>Taragot Sounds er et uavhengig norsk plateselskap etablert i 2014 av musiker, produsent og folkemusikkforsker Tellef Kvifte. Selskapet ble opprinnelig startet som en plattform for prosjektene til Tellef, Guro Kvifte Nesheim (komponist, fele- og hardingfelespiller) og Knut Kvifte Nesheim (komponist, trommeslager og vibrafonist). Sammen har de bygget et selskap som utgir tradisjonsmusikk, folkemusikk, samtidsjazz og fri improvisasjon, med et musikalsk uttrykk som spenner fra akustisk til elektronisk, og fra tradisjonelt til eksperimentelt.</p>
+        <p>Etter hvert har også en større krets av medmusikanter og venner blitt involvert, og i dag teller katalogen nærmere 50 utgivelser. Felles for alle utgivelsene er et musikalsk tvisyn med blikk for både røtter og nyskaping.</p>
+        <p>Navnet Taragot er hentet fra det østeuropeiske blåseinstrumentet tárogató, som har røtter i rumensk og ungarsk folkemusikk, men også brukt av kjente jazzmusikere som Charles Lloyd og Joe Lovano. På samme måte som instrumentet, favner Taragot Sounds musikk i spenningsfeltet mellom tradisjon og samtid.</p>
+        <p>Alle utgivelser er til salgs på <a class="lenke" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener">Bandcamp&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a>, og tilgjengelig på alle strømmetjenester.</p>
+      </div>
+    </section>
+
+    <section class="to-kol folk-seksjon">
+      <div>
+        <h2 class="tittel">Menneskene bak</h2>
+      </div>
+      <!-- Portretter: legg dem i bilder/om-oss/ som tellef.jpg, guro.jpg, knut.jpg (stående, 4:5). -->
+      <div class="folk">
+        <div class="person">
+          <div class="bilde-plass">Portrett<img src="bilder/om-oss/tellef.jpg" alt="" onerror="this.remove()"></div>
+          <h3>Tellef Kvifte</h3>
+          <p>Grunnlegger. Musiker, produsent og folkemusikkforsker</p>
+          <ul class="person-kontakt">
+            <li><a class="lenke" href="mailto:tellef@taragot.no">tellef@taragot.no</a></li>
+            <li><a class="lenke" href="tel:+4793217479">+47 932 17 479</a></li>
+          </ul>
+        </div>
+        <div class="person">
+          <div class="bilde-plass">Portrett<img src="bilder/om-oss/guro.jpg" alt="" onerror="this.remove()"></div>
+          <h3>Guro Kvifte Nesheim</h3>
+          <p>Komponist, fele- og hardingfelespiller</p>
+          <ul class="person-kontakt">
+            <li><a class="lenke" href="mailto:guro@taragot.no">guro@taragot.no</a></li>
+            <li><a class="lenke" href="tel:+4794359773">+47 943 59 773</a></li>
+          </ul>
+        </div>
+        <div class="person">
+          <div class="bilde-plass">Portrett<img src="bilder/om-oss/knut.jpg" alt="" onerror="this.remove()"></div>
+          <h3>Knut Kvifte Nesheim</h3>
+          <p>Komponist, trommeslager og vibrafonist</p>
+          <ul class="person-kontakt">
+            <li><a class="lenke" href="mailto:knut@taragot.no">knut@taragot.no</a></li>
+            <li><a class="lenke" href="tel:+4795150192">+47 951 50 192</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+    <footer>
+    <div class="footer-topp">
+      <div class="footer-kol footer-logo"><img src="bilder/logo.png" alt="Taragot Sounds" width="72" height="59"></div>
+      <div class="footer-kol">
+        <h3>Adresse</h3>
+        <p>Skedsmogata 5<br>0655 Oslo</p>
+      </div>
+      <div class="footer-kol">
+        <h3>Følg oss</h3>
+        <ul>
+          <li><a class="lenke" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener">Bandcamp&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a></li>
+          <li><a class="lenke" href="https://www.instagram.com/taragotsounds/" target="_blank" rel="noopener">Instagram&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a></li>
+          <li><a class="lenke" href="https://www.facebook.com/taragotsounds" target="_blank" rel="noopener">Facebook&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bunn">
+      <span>© 2026 Taragot Sounds · Org. nr. 997 677 897</span>
+      <a class="lenke til-toppen" href="#">Til toppen&nbsp;↑</a>
+    </div>
+  </footer>
+
+  <script src="felles.js"></script>
+
+</body>
+</html>
