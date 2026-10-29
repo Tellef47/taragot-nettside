@@ -60,11 +60,39 @@
       <h1 class="sidetittel">Om oss</h1>
     </section>
 
-    <!-- Fellesbilde: legg bildet i bilder/om-oss/felles.jpg (helst minst 2000 px bredt). -->
-    <figure class="fellesbilde">
-      <div class="bilde-plass">Fellesbilde<img src="bilder/om-oss/felles.jpg" alt="Tellef Kvifte, Guro Kvifte Nesheim og Knut Kvifte Nesheim" onerror="this.remove()"></div>
-      <figcaption>Tellef Kvifte, Guro Kvifte Nesheim og Knut Kvifte Nesheim.</figcaption>
-    </figure>
+    <section class="innhold folk-seksjon" aria-labelledby="menneskene">
+      <h2 class="sr-only" id="menneskene">Menneskene bak</h2>
+      <!-- Portretter: legg dem i bilder/om-oss/ som tellef.jpg, guro.jpg, knut.jpg (stående, 4:5). -->
+      <div class="folk">
+        <div class="person">
+          <div class="bilde-plass">Portrett<img src="bilder/om-oss/tellef.jpg" alt="" onerror="this.remove()"></div>
+          <h3>Tellef Kvifte</h3>
+          <p>Grunnlegger. Musiker, produsent og folkemusikkforsker</p>
+          <ul class="person-kontakt">
+            <li><a class="lenke" href="mailto:tellef@taragot.no">tellef@taragot.no</a></li>
+            <li><a class="lenke" href="tel:+4793217479">+47 932 17 479</a></li>
+          </ul>
+        </div>
+        <div class="person">
+          <div class="bilde-plass">Portrett<img src="bilder/om-oss/guro.jpg" alt="" onerror="this.remove()"></div>
+          <h3>Guro Kvifte Nesheim</h3>
+          <p>Komponist, fele- og hardingfelespiller</p>
+          <ul class="person-kontakt">
+            <li><a class="lenke" href="mailto:guro@taragot.no">guro@taragot.no</a></li>
+            <li><a class="lenke" href="tel:+4794359773">+47 943 59 773</a></li>
+          </ul>
+        </div>
+        <div class="person">
+          <div class="bilde-plass">Portrett<img src="bilder/om-oss/knut.jpg" alt="" onerror="this.remove()"></div>
+          <h3>Knut Kvifte Nesheim</h3>
+          <p>Komponist, trommeslager og vibrafonist</p>
+          <ul class="person-kontakt">
+            <li><a class="lenke" href="mailto:knut@taragot.no">knut@taragot.no</a></li>
+            <li><a class="lenke" href="tel:+4795150192">+47 951 50 192</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
     <section class="to-kol">
       <div>
@@ -75,30 +103,6 @@
         <p>Etter hvert har også en større krets av medmusikanter og venner blitt involvert, og i dag teller katalogen nærmere 50 utgivelser. Felles for alle utgivelsene er et musikalsk tvisyn med blikk for både røtter og nyskaping.</p>
         <p>Navnet Taragot er hentet fra det østeuropeiske blåseinstrumentet tárogató, som har røtter i rumensk og ungarsk folkemusikk, men også brukt av kjente jazzmusikere som Charles Lloyd og Joe Lovano. På samme måte som instrumentet, favner Taragot Sounds musikk i spenningsfeltet mellom tradisjon og samtid.</p>
         <p>Alle utgivelser er til salgs på <a class="lenke" href="https://taragot.bandcamp.com/" target="_blank" rel="noopener">Bandcamp&nbsp;<span aria-hidden="true">↗</span><span class="sr-only"> (åpnes i ny fane)</span></a>, og tilgjengelig på alle strømmetjenester.</p>
-      </div>
-    </section>
-
-    <section class="to-kol folk-seksjon">
-      <div>
-        <h2 class="tittel">Menneskene bak</h2>
-      </div>
-      <!-- Portretter: legg dem i bilder/om-oss/ som tellef.jpg, guro.jpg, knut.jpg (stående, 4:5). -->
-      <div class="folk">
-        <div class="person">
-          <div class="bilde-plass">Portrett<img src="bilder/om-oss/tellef.jpg" alt="" onerror="this.remove()"></div>
-          <h3>Tellef Kvifte</h3>
-          <p>Grunnlegger. Musiker, produsent og folkemusikkforsker</p>
-        </div>
-        <div class="person">
-          <div class="bilde-plass">Portrett<img src="bilder/om-oss/guro.jpg" alt="" onerror="this.remove()"></div>
-          <h3>Guro Kvifte Nesheim</h3>
-          <p>Komponist, fele- og hardingfelespiller</p>
-        </div>
-        <div class="person">
-          <div class="bilde-plass">Portrett<img src="bilder/om-oss/knut.jpg" alt="" onerror="this.remove()"></div>
-          <h3>Knut Kvifte Nesheim</h3>
-          <p>Komponist, trommeslager og vibrafonist</p>
-        </div>
       </div>
     </section>
 
@@ -117,7 +121,6 @@
       </ul>
     </div>
     <div class="footer-topp">
-      <div class="footer-logo"><img src="bilder/logo.png" alt="Taragot Sounds" width="72" height="59"></div>
       <div class="footer-innhold">
         <div class="footer-kol">
           <h3>Adresse</h3>
@@ -135,7 +138,7 @@
     </div>
     <div class="footer-bunn">
       <span>© 2026 Taragot Sounds · Org. nr. 997 677 897</span>
-      <a class="lenke til-toppen" href="#">Til toppen&nbsp;↑</a>
+      <a class="til-toppen" href="#" aria-label="Til toppen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
     </div>
   </footer>
 

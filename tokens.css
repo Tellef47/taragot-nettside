@@ -20,6 +20,7 @@
   --linje:     #E2E2E2;   /* svake skillelinjer (kort-grid o.l.) */
   --cover-kant: rgba(0, 0, 0, 0.10); /* hårlinje rundt coverbilder */
   --linje-sterk: #B0B0B0; /* tydeligere linjer */
+  --felt-kant:   #8F8F8F; /* kant rundt skjemafelt (kontrast 3,2:1)    */
   --linje-svart: #000000; /* svarte konturer: input, footer-topplinje */
 
   --aksent:       #F05923;  /* ORANSJE — sterkere oransje fra Mildrids skisse
@@ -51,6 +52,7 @@
   --t-seksjon:    36px;   /* seksjonsoverskrifter, store bokstaver (mobil: 22px) */
   --t-intro:      22px;   /* introteksten øverst (mobil: 19px) */
   --t-meny:       16px;
+  --t-nav:        18px;   /* toppmenyen på PC */
   --t-meny-stor:  34px;   /* lenkene i mobilmenyen */
   --t-knapp:      15px;
   --t-liten:      14px;
@@ -58,7 +60,7 @@
   --linjehoyde:   1.4;
 
   /* --- LAYOUT -------------------------------------------------------- */
-  --gutter:       40px;   /* sidemarginal på desktop (mobil: 16px)       */
+  --gutter:       56px;   /* sidemarginal på desktop (mobil: 20px)       */
 
 }
 
