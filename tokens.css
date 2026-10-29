@@ -46,9 +46,9 @@
   --t-h3:         24px;
   --t-brod:       18px;
   --t-h1-ny:      40px;   /* H1: introsetningen (mobil: 26px) */
-  --t-sidetittel-ny: 44px; /* H1 på undersider, f.eks. KATALOG (mobil: 28px) */
+  --t-sidetittel-ny: 40px; /* H1 på undersider, f.eks. KATALOG (mobil: 28px) */
   --t-ingress:    22px;   /* ingress under sidetittel (mobil: 19px) */
-  --t-h2-ny:      34px;   /* H2: seksjonsoverskrifter (mobil: 20px) */
+  --t-h2-ny:      30px;   /* H2: seksjonsoverskrifter (mobil: 20px) */
   --t-seksjon:    36px;   /* seksjonsoverskrifter, store bokstaver (mobil: 22px) */
   --t-intro:      22px;   /* introteksten øverst (mobil: 19px) */
   --t-meny:       16px;
