@@ -11,6 +11,19 @@ window.addEventListener('scroll', function () {
   sisteY = y;
 }, { passive: true });
 
+// Til toppen-knappen vises når man har scrollet forbi første skjermbilde
+var tilToppen = document.querySelector('.til-toppen');
+if (tilToppen) {
+  var visTilToppen = function () { tilToppen.classList.toggle('til-toppen--synlig', window.scrollY > window.innerHeight * 0.6); };
+  window.addEventListener('scroll', visTilToppen, { passive: true });
+  visTilToppen();
+  tilToppen.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    var logo = document.querySelector('.logo'); if (logo) logo.focus({ preventScroll: true });
+  });
+}
+
 // Hamburgermeny (mobil)
 var menyKnapp = document.getElementById('meny-knapp');
 function settMeny(apen) {

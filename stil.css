@@ -282,8 +282,13 @@ footer {
    seksjonene over: tittel til venstre, innhold til høyre. */
 .footer-kontakt { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; padding-bottom: 64px; }
 .footer-kontakt .tittel { margin-bottom: 12px; }
+/* Kontaktpersoner som «visittkort»: navn, e-post og telefon samlet i én kolonne */
+.footer-kontakt .kontaktliste { display: grid; grid-template-columns: repeat(4, max-content); justify-content: space-between; gap: 32px 24px; }
+.footer-kontakt .kontaktliste .navn { white-space: nowrap; }
+.footer-kontakt .kontaktliste li { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 0; }
+.footer-kontakt .kontaktliste .navn { margin-bottom: 6px; }
 .footer-topp { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; padding-bottom: 48px; }
-.footer-innhold { grid-column: 2; display: grid; grid-template-columns: 1.2fr 1.2fr 1fr; gap: 24px; } /* samme kolonner som kontaktlisten */
+.footer-innhold { grid-column: 2; display: grid; grid-template-columns: repeat(4, max-content); justify-content: start; gap: 24px 80px; }
 .footer-kol h3 {
   margin: 0 0 10px; font-size: var(--t-caption); font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-svak-2);
@@ -294,20 +299,28 @@ footer {
   display: flex; justify-content: space-between; align-items: center; gap: 20px;
   padding-top: 8px; font-size: var(--t-caption); color: var(--text-svak-2);
 }
-/* Til toppen: rund knapp med pil, samme stil som menyknappen */
+/* Til toppen: rund knapp med pil, samme stil som menyknappen.
+   Ligger fast nede i høyre hjørne og vises når man har scrollet ned. */
 .til-toppen {
-  flex: none; width: 44px; height: 44px; border-radius: 50%;
-  border: 1.5px solid var(--aksent); color: var(--text);
+  position: fixed; right: var(--gutter); bottom: 24px; z-index: 40;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1.5px solid var(--aksent); background: var(--bg); color: var(--text);
   display: inline-flex; align-items: center; justify-content: center;
-  transition: background .15s ease;
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s, background .15s ease;
 }
+.til-toppen--synlig { opacity: 1; visibility: visible; transform: none; }
 .til-toppen svg { width: 20px; height: 20px; transition: transform .15s ease; }
 .til-toppen:hover { background: var(--aksent); }
 .til-toppen:hover svg { transform: translateY(-2px); }
+body.meny-apen .til-toppen { visibility: hidden; }
 
 /* =====================================================================
    NETTBRETT
    ===================================================================== */
+@media (max-width: 1180px) {
+  .footer-kontakt .kontaktliste { grid-template-columns: repeat(2, max-content); justify-content: start; column-gap: 64px; }
+}
 @media (max-width: 1000px) {
   .kort-rad { grid-template-columns: repeat(2, 1fr); }
 }
@@ -319,6 +332,7 @@ footer {
   :root { --gutter: 20px; --t-h2-ny: 20px; --t-sidetittel-ny: 28px; --t-ingress: 19px; --seksjon-luft: 48px; }
 
   .nav { align-items: center; padding: 16px var(--gutter); }
+  .logo img { width: 68px; }
   /* Mobilmeny: dekker hele skjermen, store lenker.
      Ligger bak logo og lukkeknapp (z-index -1 inne i headeren). */
   .nav-lenker {
@@ -352,10 +366,6 @@ footer {
   .sidetopp { padding: 32px var(--gutter) 36px; }
   .sidetopp--to-kol { grid-template-columns: 1fr; gap: 0; }
   .sidetopp--to-kol .sideingress { margin-top: 18px; }
-  /* Sidetittel til venstre, ingress til høyre (samme kolonner som .to-kol) */
-.sidetopp--to-kol { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; align-items: start; }
-.sidetopp--to-kol .sideingress { margin-top: 4px; }
-.sideingress { margin-top: 18px; }
 
   .utgivelser-topp { margin-bottom: 18px; }
   .pilknapper { display: flex; }
@@ -367,16 +377,17 @@ footer {
   /* Forsiden: karusell med fokus på kortet i midten */
   .karusell {
     display: flex; gap: 16px;
-    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none;
+    overscroll-behavior-x: contain; touch-action: pan-x pan-y;
     margin: 0 calc(var(--gutter) * -1); padding: 0 15%;
   }
   .karusell::-webkit-scrollbar { display: none; }
   .karusell .kort {
     flex: 0 0 70%; scroll-snap-align: center;
-    opacity: .4; transform: scale(.92); transform-origin: center top;
-    transition: opacity .25s ease, transform .25s ease;
+    opacity: .4; transition: opacity .25s ease;
   }
-  .karusell .kort.fokus { opacity: 1; transform: none; }
+  .karusell .kort.fokus { opacity: 1; }
+  .karusell .kort:hover .cover img { transform: none; }
   .karusell .kort h3, .karusell .kort .artist { font-size: var(--t-meny); }
 
   .se-alle { margin: 36px 0 var(--seksjon-luft); }
@@ -390,9 +401,11 @@ footer {
 
   footer { padding: 48px 0 28px; }
   .footer-kontakt { grid-template-columns: 1fr; gap: 20px; padding-bottom: 32px; }
+  .footer-kontakt .kontaktliste { grid-template-columns: 1fr; gap: 24px; }
+  .footer-kontakt .kontaktliste li { gap: 4px; }
+  .footer-kontakt .kontaktliste .navn { margin-bottom: 2px; }
   .footer-topp { grid-template-columns: 1fr; gap: 32px; padding-bottom: 40px; }
   .footer-innhold { grid-column: 1; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .footer-bunn { align-items: flex-end; }
 }
 
 @media (prefers-reduced-motion: reduce) {
