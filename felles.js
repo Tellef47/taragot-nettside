@@ -45,7 +45,7 @@ document.addEventListener('keydown', function (e) {
 });
 // Lukk menyen hvis vinduet blir bredt nok til vanlig meny
 window.addEventListener('resize', function () {
-  if (window.innerWidth > 767 && nav.classList.contains('nav--apen')) settMeny(false);
+  if (window.innerWidth > 1000 && nav.classList.contains('nav--apen')) settMeny(false);
 });
 
 // Språkvelger

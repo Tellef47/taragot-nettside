@@ -284,24 +284,17 @@ footer {
   border-top: 1px solid var(--linje-sterk);
   font-size: var(--t-liten); color: var(--text);
 }
-/* Kontakt oss er første del av footeren, med samme oppbygging som
-   seksjonene over: tittel til venstre, innhold til høyre. */
-.footer-kontakt { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; padding-bottom: 64px; }
-.footer-kontakt .tittel { margin-bottom: 12px; }
-/* Kontaktpersoner som «visittkort»: navn, e-post og telefon samlet i én kolonne */
-.footer-kontakt .kontaktliste { display: grid; grid-template-columns: repeat(4, max-content); justify-content: space-between; gap: 32px 24px; }
-.footer-kontakt .kontaktliste .navn { white-space: nowrap; }
-/* Samme utforming som Adresse og Følg oss: små grå titler, lenker i 14 px */
-.footer-kontakt .kontaktliste .navn {
-  font-size: var(--t-caption); font-weight: 600; color: var(--text-svak-2);
-  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;
+/* Kontakt oss er første del av footeren: tittel til venstre, innhold til høyre.
+   Personene, adressen og Følg oss står i ett felles rutenett, så kolonnene
+   står i linje og avstanden er lik overalt. */
+.footer-kontakt { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; padding-bottom: 56px; }
+.footer-grid {
+  display: grid; grid-template-columns: repeat(4, max-content);
+  justify-content: space-between; gap: 40px 24px;
 }
-.footer-kontakt .kontaktliste .lenke { font-size: var(--t-liten); line-height: 1.9; }
-.footer-kontakt .kontaktliste li { gap: 0; }
-.footer-kontakt .kontaktliste li { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 0; }
-.footer-kontakt .kontaktliste .navn { margin-bottom: 6px; }
-.footer-topp { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; padding-bottom: 48px; }
-.footer-innhold { grid-column: 2; display: grid; grid-template-columns: repeat(4, max-content); justify-content: start; gap: 24px 80px; }
+.footer-kol--person h3 { white-space: nowrap; }
+/* Litt ekstra luft mellom personene og Adresse / Følg oss */
+.footer-grid > .footer-kol:not(.footer-kol--person) { margin-top: 24px; }
 .footer-kol h3 {
   margin: 0 0 10px; font-size: var(--t-caption); font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-svak-2);
@@ -332,20 +325,19 @@ body.meny-apen .til-toppen { visibility: hidden; }
    NETTBRETT
    ===================================================================== */
 @media (max-width: 1180px) {
-  .footer-kontakt .kontaktliste { grid-template-columns: repeat(2, max-content); justify-content: start; column-gap: 64px; }
+  /* Smalere skjerm: to kolonner, så navnene ikke deles */
+  .footer-grid { grid-template-columns: repeat(2, max-content); justify-content: start; column-gap: 72px; }
 }
 @media (max-width: 1000px) {
   .kort-rad { grid-template-columns: repeat(2, 1fr); }
-}
 
-/* =====================================================================
-   MOBIL
-   ===================================================================== */
-@media (max-width: 767px) {
-  :root { --gutter: 20px; --t-h2-ny: 20px; --t-sidetittel-ny: 28px; --t-ingress: 19px; --seksjon-luft: 48px; }
+  /* Nettbrett og mobil: tittel over innholdet i Kontakt oss og på Katalog */
+  .footer-kontakt { grid-template-columns: 1fr; gap: 24px; }
+  .sidetopp--to-kol { grid-template-columns: 1fr; gap: 0; }
+  .sidetopp--to-kol .sideingress { margin-top: 24px; }
 
+  /* Nettbrett og mobil: rund menyknapp i stedet for menylinjen */
   .nav { align-items: center; padding: 16px var(--gutter); }
-  .logo img { width: 68px; }
   /* Mobilmeny: dekker hele skjermen, store lenker.
      Ligger bak logo og lukkeknapp (z-index -1 inne i headeren). */
   .nav-lenker {
@@ -373,6 +365,15 @@ body.meny-apen .til-toppen { visibility: hidden; }
   .meny-mobil { display: block; margin-top: 36px; }
   .meny-knapp { display: inline-flex; }
   body.meny-apen { overflow: hidden; }
+}
+
+/* =====================================================================
+   MOBIL
+   ===================================================================== */
+@media (max-width: 767px) {
+  :root { --gutter: 20px; --t-h2-ny: 20px; --t-sidetittel-ny: 28px; --t-ingress: 19px; --seksjon-luft: 48px; }
+
+  .logo img { width: 68px; }
 
   .intro { padding: 28px var(--gutter) var(--seksjon-luft); }
   .intro h1 { font-size: 24px; }
@@ -415,11 +416,9 @@ body.meny-apen .til-toppen { visibility: hidden; }
   .folk { grid-template-columns: 1fr; gap: 40px; }
 
   footer { padding: 48px 0 28px; }
-  .footer-kontakt { grid-template-columns: 1fr; gap: 20px; padding-bottom: 32px; }
-  .footer-kontakt .kontaktliste { grid-template-columns: 1fr; gap: 24px; }
-  .footer-kontakt .kontaktliste li { gap: 0; }
-  .footer-topp { grid-template-columns: 1fr; gap: 32px; padding-bottom: 40px; }
-  .footer-innhold { grid-column: 1; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .footer-kontakt { grid-template-columns: 1fr; gap: 24px; padding-bottom: 32px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
+  .footer-kol--person { grid-column: 1 / -1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
