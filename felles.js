@@ -66,7 +66,7 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && !sprakListe.hidden) { lukkSprak(); sprakKnapp.focus(); }
 });
 
-// Karusell (forsiden, mobil): kortet nærmest midten får fokus
+// Karusell (forsiden, mobil): coveret lengst til venstre får fokus
 (function () {
   var rad = document.querySelector('.karusell');
   if (!rad) return;
@@ -76,9 +76,11 @@ document.addEventListener('keydown', function (e) {
   var aktiv = 0;
   function erKarusell() { return getComputedStyle(rad).display === 'flex'; }
   function finnAktiv() {
-    var midt = rad.scrollLeft + rad.clientWidth / 2, best = 0, avstand = Infinity;
+    // Helt til høyre: siste cover er aktivt
+    if (rad.scrollLeft + rad.clientWidth >= rad.scrollWidth - 4) return kortene.length - 1;
+    var start = rad.scrollLeft + parseFloat(getComputedStyle(rad).paddingLeft), best = 0, avstand = Infinity;
     kortene.forEach(function (k, i) {
-      var d = Math.abs(k.offsetLeft + k.offsetWidth / 2 - midt);
+      var d = Math.abs(k.offsetLeft - start);
       if (d < avstand) { avstand = d; best = i; }
     });
     return best;
@@ -91,7 +93,7 @@ document.addEventListener('keydown', function (e) {
   }
   function gaaTil(i) {
     var k = kortene[i];
-    rad.scrollTo({ left: k.offsetLeft - (rad.clientWidth - k.offsetWidth) / 2, behavior: 'smooth' });
+    rad.scrollTo({ left: k.offsetLeft - parseFloat(getComputedStyle(rad).paddingLeft), behavior: 'smooth' });
   }
   forrige.addEventListener('click', function () { if (aktiv > 0) gaaTil(aktiv - 1); });
   neste.addEventListener('click', function () { if (aktiv < kortene.length - 1) gaaTil(aktiv + 1); });

@@ -169,9 +169,10 @@ a:focus-visible, button:focus-visible {
 }
 .cover img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  transition: transform .35s ease;
+  transition: filter .3s ease;
 }
-.kort:hover .cover img, .kort:focus-visible .cover img { transform: scale(1.03); }
+/* Hover: coveret blir gråtonet og bleket, som om det er litt transparent */
+.kort:hover .cover img, .kort:focus-visible .cover img { filter: grayscale(1) contrast(.75) brightness(1.15); }
 /* Hårlinje rundt coveret, så lyse covere ikke flyter ut i bakgrunnen */
 .cover::after {
   content: ""; position: absolute; inset: 0; border-radius: 4px;
@@ -381,20 +382,21 @@ body.meny-apen .til-toppen { visibility: hidden; }
   .kort-rad { grid-template-columns: 1fr 1fr; gap: 28px 14px; }
   .kort-rad .kort h3, .kort-rad .kort .artist { font-size: var(--t-liten); }
 
-  /* Forsiden: karusell med fokus på kortet i midten */
+  /* Forsiden: karusell. Første cover starter i linje med resten av innholdet. */
   .karusell {
     display: flex; gap: 16px;
     overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none;
     overscroll-behavior-x: contain; touch-action: pan-x pan-y;
-    margin: 0 calc(var(--gutter) * -1); padding: 0 15%;
+    margin: 0 calc(var(--gutter) * -1); padding: 0 var(--gutter);
+    scroll-padding: 0 var(--gutter);
   }
   .karusell::-webkit-scrollbar { display: none; }
   .karusell .kort {
-    flex: 0 0 70%; scroll-snap-align: center;
+    flex: 0 0 78%; scroll-snap-align: start;
     opacity: .4; transition: opacity .25s ease;
   }
   .karusell .kort.fokus { opacity: 1; }
-  .karusell .kort:hover .cover img { transform: none; }
+  .karusell .kort:hover .cover img { filter: none; }
   .karusell .kort h3, .karusell .kort .artist { font-size: var(--t-meny); }
 
   .se-alle { margin: 36px 0 var(--seksjon-luft); }
