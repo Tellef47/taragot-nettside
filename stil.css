@@ -171,13 +171,12 @@ a:focus-visible, button:focus-visible {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   transition: filter .3s ease;
 }
-/* Hover: coveret blir svart-hvitt med en lys hinne over */
+/* Hover: coveret blekner litt (beholder fargene), som tegn på at det kan klikkes */
 .cover::before {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: var(--bg); opacity: 0; transition: opacity .3s ease;
 }
-.kort:hover .cover img, .kort:focus-visible .cover img { filter: grayscale(1); }
-.kort:hover .cover::before, .kort:focus-visible .cover::before { opacity: .55; }
+.kort:hover .cover::before, .kort:focus-visible .cover::before { opacity: .5; }
 /* Hårlinje rundt coveret, så lyse covere ikke flyter ut i bakgrunnen */
 .cover::after {
   content: ""; position: absolute; inset: 0; border-radius: 4px;
@@ -402,7 +401,6 @@ body.meny-apen .til-toppen { visibility: hidden; }
     opacity: .4; transition: opacity .25s ease;
   }
   .karusell .kort.fokus { opacity: 1; }
-  .karusell .kort:hover .cover img { filter: none; }
   .karusell .kort:hover .cover::before { opacity: 0; }
   .karusell .kort h3, .karusell .kort .artist { font-size: var(--t-meny); }
 
