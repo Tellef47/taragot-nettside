@@ -190,6 +190,14 @@ a:focus-visible, button:focus-visible {
 .kort:hover .pil-ut, .kort:focus-visible .pil-ut { color: var(--text); transform: translate(2px, -2px); }
 .kort .artist { font-size: var(--t-meny); color: var(--text-svak-2); margin: 0; line-height: 1.3; }
 .kort .format { font-size: var(--t-caption); color: var(--text-svak-2); margin: 4px 0 0; }
+/* Kommende utgivelse: merke oppå coveret. Fjernes automatisk på slippdagen (felles.js). */
+.slipp-merke {
+  position: absolute; left: 10px; top: 10px; z-index: 2;
+  background: rgba(0, 0, 0, .72); color: #FFFFFF;
+  border: 1.5px solid var(--aksent); backdrop-filter: blur(2px);
+  font-size: var(--t-caption); font-weight: 600; letter-spacing: 0.02em;
+  padding: 5px 10px; border-radius: 999px;
+}
 
 .se-alle { margin: 56px 0 var(--seksjon-luft); }
 .katalog { padding-bottom: var(--seksjon-luft); }

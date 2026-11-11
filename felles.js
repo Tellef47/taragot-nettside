@@ -24,6 +24,15 @@ if (tilToppen) {
   });
 }
 
+// Kommende utgivelser: fjern «Kommer …»-merket når slippdatoen er nådd
+document.querySelectorAll('[data-slipp]').forEach(function (kort) {
+  var slipp = new Date(kort.getAttribute('data-slipp') + 'T00:00:00');
+  if (new Date() >= slipp) {
+    var merke = kort.querySelector('.slipp-merke'); if (merke) merke.remove();
+    var sr = kort.querySelector('.sr-only'); if (sr) sr.textContent = ' – hør på Bandcamp (åpnes i ny fane)';
+  }
+});
+
 // Hamburgermeny (mobil)
 var menyKnapp = document.getElementById('meny-knapp');
 function settMeny(apen) {
