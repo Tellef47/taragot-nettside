@@ -40,3 +40,10 @@ nettleservinduet smalere på PC.
 ## Jobbe flere sammen
 Kjør `git pull` før du begynner å redigere, og `git push` når du er ferdig — så
 unngår dere å overskrive hverandre.
+
+## Engelsk versjon
+De engelske sidene ligger i `en/` (index.html, catalogue.html, about.html).
+De lages automatisk fra de norske sidene med `verktoy/lag-engelsk.py`, som også
+har alle oversettelsene. Endres en norsk side, må skriptet kjøres på nytt
+(og nye tekster legges inn i skriptet), ellers blir den engelske siden utdatert.
+Albumtitler, artistnavn, navn, e-post og telefon oversettes ikke.

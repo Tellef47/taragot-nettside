@@ -1,6 +1,22 @@
 // Felles oppførsel for alle sidene: meny, språkvelger, karusell og nyhetsbrev.
 // Hver del kjører bare hvis siden har elementene den trenger.
 
+// Tekster som skrives av skriptet, på norsk og engelsk (<html lang="en"> gir engelsk)
+var ENGELSK = document.documentElement.lang === 'en';
+var TEKST = ENGELSK ? {
+  lukkMeny: 'Close menu', aapneMeny: 'Open menu',
+  hoerBandcamp: ' – listen on Bandcamp (opens in a new tab)',
+  ugyldig: 'Something doesn’t look quite right. Check that your email address is correct, and try again.',
+  ikkeLagret: 'We couldn’t save your subscription. Please try again later, or email post@taragot.no.',
+  sprak: 'en'
+} : {
+  lukkMeny: 'Lukk meny', aapneMeny: 'Åpne meny',
+  hoerBandcamp: ' – hør på Bandcamp (åpnes i ny fane)',
+  ugyldig: 'Noe ser ikke helt riktig ut. Sjekk at e-postadressen er skrevet riktig, og prøv igjen.',
+  ikkeLagret: 'Vi fikk ikke lagret påmeldingen din. Prøv igjen litt senere, eller send en e-post til post@taragot.no.',
+  sprak: 'nb'
+};
+
 // Meny skjules når man scroller ned, vises når man scroller opp
 var nav = document.getElementById('nav');
 var sisteY = window.scrollY;
@@ -29,7 +45,7 @@ document.querySelectorAll('[data-slipp]').forEach(function (kort) {
   var slipp = new Date(kort.getAttribute('data-slipp') + 'T00:00:00');
   if (new Date() >= slipp) {
     var merke = kort.querySelector('.slipp-merke'); if (merke) merke.remove();
-    var sr = kort.querySelector('.sr-only'); if (sr) sr.textContent = ' – hør på Bandcamp (åpnes i ny fane)';
+    var sr = kort.querySelector('.sr-only'); if (sr) sr.textContent = TEKST.hoerBandcamp;
   }
 });
 
@@ -39,7 +55,7 @@ function settMeny(apen) {
   nav.classList.toggle('nav--apen', apen);
   document.body.classList.toggle('meny-apen', apen);
   menyKnapp.setAttribute('aria-expanded', apen);
-  menyKnapp.setAttribute('aria-label', apen ? 'Lukk meny' : 'Åpne meny');
+  menyKnapp.setAttribute('aria-label', apen ? TEKST.lukkMeny : TEKST.aapneMeny);
   if (apen) document.documentElement.style.setProperty('--meny-topp', (nav.getBoundingClientRect().bottom + 16) + 'px');
   if (apen) { var forste = document.querySelector('#meny > a'); if (forste) forste.focus(); }
 }
@@ -154,7 +170,7 @@ document.addEventListener('keydown', function (e) {
     data.append('EMAIL', epost);
     data.append('FIRSTNAME', navnFelt.value.trim());
     data.append('email_address_check', '');   // felle for roboter, skal være tom
-    data.append('locale', 'nb');
+    data.append('locale', TEKST.sprak);
     data.append('html_type', 'simple');
 
     knapp.setAttribute('aria-busy', 'true'); knapp.disabled = true;
@@ -164,7 +180,7 @@ document.addEventListener('keydown', function (e) {
       })
       .then(function (svar) {
         if (svar && svar.success) visBekreftelse(epost);
-        else visFeil('Noe ser ikke helt riktig ut. Sjekk at e-postadressen er skrevet riktig, og prøv igjen.');
+        else visFeil(TEKST.ugyldig);
       })
       .catch(function () {
         // Nettleseren fikk ikke lese svaret fra Brevo (CORS). Send på nytt uten å lese svaret;
@@ -172,7 +188,7 @@ document.addEventListener('keydown', function (e) {
         return fetch(BREVO_ADRESSE, { method: 'POST', body: data, mode: 'no-cors' })
           .then(function () { visBekreftelse(epost); })
           .catch(function () {
-            visFeil('Vi fikk ikke lagret påmeldingen din. Prøv igjen litt senere, eller send en e-post til post@taragot.no.');
+            visFeil(TEKST.ikkeLagret);
           });
       })
       .finally(function () {
