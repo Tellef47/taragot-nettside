@@ -241,7 +241,31 @@ a:focus-visible, button:focus-visible {
 .felt input:focus { outline: 2px solid var(--text); outline-offset: 1px; border-color: var(--text); }
 .personvern { font-size: var(--t-caption); color: var(--text-svak-2); margin: 0 0 22px; }
 .personvern a { text-decoration: underline; text-underline-offset: 3px; }
-.takk { display: none; margin-top: 14px; font-size: var(--t-liten); }
+/* Nyhetsbrev: bekreftelse vises der skjemaet stod, uten ny side */
+.bekreftelse {
+  display: flex; gap: 20px; align-items: flex-start;
+  padding: 28px; border: 1px solid var(--linje); border-radius: 6px;
+  background: var(--bg-alt);
+}
+.bekreftelse[hidden], .skjema-feil[hidden], #paamelding[hidden] { display: none; }
+.bekreftelse:focus { outline: none; }
+.bekreftelse-ikon {
+  flex: none; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--aksent); color: var(--text);
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.bekreftelse-ikon svg { width: 22px; height: 22px; }
+.bekreftelse-tittel { margin: 6px 0 6px; font-size: var(--t-meny); font-weight: 600; }
+.bekreftelse-tekst { margin: 0 0 16px; font-size: var(--t-liten); color: var(--text-svak-2); line-height: 1.6; }
+.bekreftelse-tekst strong { color: var(--text); font-weight: 500; }
+.tekstknapp {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font-family: inherit; font-size: var(--t-liten); color: var(--text);
+  text-decoration: underline; text-decoration-color: var(--aksent); text-underline-offset: 4px;
+}
+.tekstknapp:hover { opacity: .55; }
+.skjema-feil { margin: 14px 0 0; font-size: var(--t-liten); color: #B3261E; }
+.knapp[aria-busy="true"] { opacity: .6; cursor: progress; }
 
 /* --- Kontaktliste ------------------------------------------------------ */
 .kontaktliste { list-style: none; margin: 0; padding: 0; }
@@ -408,6 +432,7 @@ body.meny-apen .til-toppen { visibility: hidden; }
 
   .to-kol { grid-template-columns: 1fr; gap: 20px; }
   .felter { grid-template-columns: 1fr; gap: 26px; margin-bottom: 34px; }
+  .bekreftelse { padding: 22px; gap: 16px; }
   .kontaktliste li { grid-template-columns: 1fr; gap: 4px; padding: 0 0 24px; }
 
   .fellesbilde .bilde-plass { aspect-ratio: 4 / 3; }

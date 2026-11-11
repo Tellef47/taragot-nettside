@@ -106,36 +106,68 @@ document.addEventListener('keydown', function (e) {
   oppdater();
 })();
 
-// Nyhetsbrev → 5b CRM.
-// CRM_ADRESSE fylles inn når crm.5b.no har et åpent mottak for påmeldinger.
-// Skjemaet sender da JSON: { navn, epost, kilde: "nettside" }.
+// Nyhetsbrev → Brevo.
+// Skjemaet sender navn og e-post rett til Brevo-skjemaet «Nettside».
+// I Brevo lagres navnet i feltet FIRSTNAME, e-posten i EMAIL.
+// Etter påmelding byttes skjemaet ut med en bekreftelse på samme sted.
 (function () {
-  var CRM_ADRESSE = '';
+  var BREVO_ADRESSE = 'https://b4f1279e.sibforms.com/serve/MUIFADoYLq1dqSA9n7HtY3Y26w3z2tjc7B2vIFuB-YmtEwrnaNvj2bMzEK6bQj7RcmZT-tGB7WSptkk8k6DNnKfKuLD0uT6nJErKgNnjNk1tmnZAPU8JuKXfwUM_P2RAtXuByCIN7USNrlnCuhWwmFIOIsKJGcWLb_YwZNnDRB2iVvhbwwT4J5QpA8RyT_XjOrJSk40VujB2Ly25ig==';
   var skjema = document.getElementById('paamelding');
   if (!skjema) return;
-  var takk = document.getElementById('takk');
+  var knapp = skjema.querySelector('button[type="submit"]');
+  var feil = document.getElementById('skjema-feil');
+  var bekreftelse = document.getElementById('bekreftelse');
+  var epostFelt = document.getElementById('epost');
+  var navnFelt = document.getElementById('navn');
+
+  function visBekreftelse(epost) {
+    document.getElementById('bekreftet-epost').textContent = epost;
+    skjema.hidden = true;
+    bekreftelse.hidden = false;
+    bekreftelse.focus();
+  }
+  function visFeil(tekst) {
+    feil.textContent = tekst;
+    feil.hidden = false;
+  }
+  document.getElementById('ny-paamelding').addEventListener('click', function () {
+    skjema.reset();
+    bekreftelse.hidden = true;
+    skjema.hidden = false;
+    navnFelt.focus();
+  });
+
   skjema.addEventListener('submit', function (e) {
     e.preventDefault();
-    takk.style.display = 'block';
-    if (!CRM_ADRESSE) {
-      takk.textContent = 'Takk! (Påmeldingen er ikke koblet til CRM-et ennå.)';
-      return;
-    }
-    takk.textContent = 'Sender …';
-    fetch(CRM_ADRESSE, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        navn: document.getElementById('navn').value,
-        epost: document.getElementById('epost').value,
-        kilde: 'nettside'
+    feil.hidden = true;
+    var epost = epostFelt.value.trim();
+    var data = new FormData();
+    data.append('EMAIL', epost);
+    data.append('FIRSTNAME', navnFelt.value.trim());
+    data.append('email_address_check', '');   // felle for roboter, skal være tom
+    data.append('locale', 'nb');
+    data.append('html_type', 'simple');
+
+    knapp.setAttribute('aria-busy', 'true'); knapp.disabled = true;
+    fetch(BREVO_ADRESSE, { method: 'POST', body: data })
+      .then(function (svar) {
+        return svar.json().catch(function () { return { success: svar.ok }; });
       })
-    }).then(function (svar) {
-      if (!svar.ok) throw new Error(svar.status);
-      takk.textContent = 'Takk! Du er nå påmeldt nyhetsbrevet.';
-      skjema.reset();
-    }).catch(function () {
-      takk.textContent = 'Noe gikk galt. Prøv igjen, eller send en e-post til post@taragot.no.';
-    });
+      .then(function (svar) {
+        if (svar && svar.success) visBekreftelse(epost);
+        else visFeil('Noe ser ikke helt riktig ut. Sjekk at e-postadressen er skrevet riktig, og prøv igjen.');
+      })
+      .catch(function () {
+        // Nettleseren fikk ikke lese svaret fra Brevo (CORS). Send på nytt uten å lese svaret;
+        // Brevo lagrer hver e-post bare én gang, så dobbel innsending er ufarlig.
+        return fetch(BREVO_ADRESSE, { method: 'POST', body: data, mode: 'no-cors' })
+          .then(function () { visBekreftelse(epost); })
+          .catch(function () {
+            visFeil('Vi fikk ikke lagret påmeldingen din. Prøv igjen litt senere, eller send en e-post til post@taragot.no.');
+          });
+      })
+      .finally(function () {
+        knapp.removeAttribute('aria-busy'); knapp.disabled = false;
+      });
   });
 })();
