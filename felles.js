@@ -70,7 +70,8 @@ document.querySelectorAll('[data-slipp]').forEach(function (kort) {
   }
   var tekster = kortene.map(function (k) {
     var tittel = k.querySelector('h3'); var artist = k.querySelector('.artist');
-    return forenkle((tittel ? tittel.textContent : '') + ' ' + (artist ? artist.textContent : ''));
+    // data-sok: ekstra søkeord, f.eks. fulle navn når artisten bare står med etternavn
+    return forenkle((tittel ? tittel.textContent : '') + ' ' + (artist ? artist.textContent : '') + ' ' + (k.getAttribute('data-sok') || ''));
   });
   function sok() {
     var q = felt.value.trim();
