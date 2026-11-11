@@ -69,8 +69,6 @@ PER_SIDE = {
     ('<title>Katalog — Taragot Sounds</title>', '<title>Catalogue — Taragot Sounds</title>'),
     ('content="Alle utgivelser fra Taragot Sounds."', 'content="All releases from Taragot Sounds."'),
     ('<h1 class="sidetittel">Katalog</h1>', '<h1 class="sidetittel">Catalogue</h1>'),
-    ('Alle våre utgivelser er tilgjengelige på alle strømmetjenester, og kan kjøpes både digitalt og fysisk på\n',
-     'All our releases are available on every streaming service, and can be bought both digitally and physically on\n'),
     ('id="alle-utgivelser">Alle utgivelser</h2>', 'id="alle-utgivelser">All releases</h2>'),
 ],
 'om-oss.html': [
