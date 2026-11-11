@@ -6,16 +6,27 @@
   <title>Om oss — Taragot Sounds</title>
   <meta name="description" content="Taragot Sounds er et uavhengig norsk plateselskap etablert i 2014.">
 
-  <!-- Inter (gratis, Google Fonts/OFL) brukes for all tekst. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Ikoner i nettleserfanen og på hjemskjermen -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Forhåndsvisning når siden deles (Facebook, Messenger, Slack o.l.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Taragot Sounds">
+  <meta property="og:title" content="Om oss — Taragot Sounds">
+  <meta property="og:description" content="Taragot Sounds er et uavhengig norsk plateselskap etablert i 2014.">
+  <meta property="og:image" content="https://nettside.5b.no/bilder/deling.jpg">
+  <meta property="og:locale" content="nb_NO">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Skriften Inter ligger på nettsiden (skrift/), ikke hos Google. -->
 
   <!-- tokens.css: farger, fonter og størrelser. stil.css: felles oppsett for alle sider. -->
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="stil.css">
 </head>
 <body>
+  <a class="hopp" href="#innhold">Hopp til innhold</a>
 
 
   <header class="nav" id="nav">
@@ -52,7 +63,7 @@
     </button>
   </header>
 
-  <main class="om-side">
+  <main id="innhold" tabindex="-1" class="om-side">
     <section class="sidetopp">
       <h1 class="sidetittel">Om oss</h1>
     </section>
@@ -154,6 +165,7 @@
     </div>
     <div class="footer-bunn">
       <span>© 2026 Taragot Sounds · Org. nr. 997 677 897</span>
+      <a class="lenke" href="personvern.html">Personvern</a>
     </div>
   </footer>
 

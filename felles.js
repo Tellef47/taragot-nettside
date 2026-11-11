@@ -8,12 +8,18 @@ var TEKST = ENGELSK ? {
   hoerBandcamp: ' – listen on Bandcamp (opens in a new tab)',
   ugyldig: 'Something doesn’t look quite right. Check that your email address is correct, and try again.',
   ikkeLagret: 'We couldn’t save your subscription. Please try again later, or email post@taragot.no.',
+  alle: function (n) { return n + ' releases'; },
+  treff: function (n, av) { return n + ' of ' + av + ' releases'; },
+  ingen: function (q) { return 'No releases match “' + q + '”.'; },
   sprak: 'en'
 } : {
   lukkMeny: 'Lukk meny', aapneMeny: 'Åpne meny',
   hoerBandcamp: ' – hør på Bandcamp (åpnes i ny fane)',
   ugyldig: 'Noe ser ikke helt riktig ut. Sjekk at e-postadressen er skrevet riktig, og prøv igjen.',
   ikkeLagret: 'Vi fikk ikke lagret påmeldingen din. Prøv igjen litt senere, eller send en e-post til post@taragot.no.',
+  alle: function (n) { return n + ' utgivelser'; },
+  treff: function (n, av) { return n + ' av ' + av + ' utgivelser'; },
+  ingen: function (q) { return 'Ingen utgivelser passer til «' + q + '».'; },
   sprak: 'nb'
 };
 
@@ -48,6 +54,43 @@ document.querySelectorAll('[data-slipp]').forEach(function (kort) {
     var sr = kort.querySelector('.sr-only'); if (sr) sr.textContent = TEKST.hoerBandcamp;
   }
 });
+
+// Søk i katalogen: viser bare utgivelser der tittel eller artist passer.
+// Skiller ikke mellom store/små bokstaver eller aksenter (anon finner Ånon, eden finner Edén).
+(function () {
+  var felt = document.getElementById('katalogsok');
+  if (!felt) return;
+  var kortene = Array.prototype.slice.call(document.querySelectorAll('#katalogliste .kort'));
+  var antall = document.getElementById('sok-antall');
+  var ingen = document.getElementById('sok-ingen');
+  var tom = document.getElementById('sok-tom');
+  function forenkle(t) {
+    return t.toLowerCase().replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/å/g, 'a')
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+  var tekster = kortene.map(function (k) {
+    var tittel = k.querySelector('h3'); var artist = k.querySelector('.artist');
+    return forenkle((tittel ? tittel.textContent : '') + ' ' + (artist ? artist.textContent : ''));
+  });
+  function sok() {
+    var q = felt.value.trim();
+    var ord = forenkle(q).split(/\s+/).filter(Boolean);
+    var vist = 0;
+    kortene.forEach(function (k, i) {
+      var passer = ord.every(function (o) { return tekster[i].indexOf(o) !== -1; });
+      k.hidden = !passer;
+      if (passer) vist++;
+    });
+    antall.textContent = ord.length ? TEKST.treff(vist, kortene.length) : TEKST.alle(kortene.length);
+    ingen.hidden = vist > 0;
+    if (!vist) ingen.textContent = TEKST.ingen(q);
+    tom.hidden = !q;
+  }
+  felt.addEventListener('input', sok);
+  felt.addEventListener('keydown', function (e) { if (e.key === 'Escape' && felt.value) { felt.value = ''; sok(); } });
+  tom.addEventListener('click', function () { felt.value = ''; sok(); felt.focus(); });
+  sok();
+})();
 
 // Hamburgermeny (mobil)
 var menyKnapp = document.getElementById('meny-knapp');

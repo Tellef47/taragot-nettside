@@ -6,16 +6,27 @@
   <title>Katalog — Taragot Sounds</title>
   <meta name="description" content="Alle utgivelser fra Taragot Sounds.">
 
-  <!-- Inter (gratis, Google Fonts/OFL) brukes for all tekst. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Ikoner i nettleserfanen og på hjemskjermen -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Forhåndsvisning når siden deles (Facebook, Messenger, Slack o.l.) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Taragot Sounds">
+  <meta property="og:title" content="Katalog — Taragot Sounds">
+  <meta property="og:description" content="Alle utgivelser fra Taragot Sounds.">
+  <meta property="og:image" content="https://nettside.5b.no/bilder/deling.jpg">
+  <meta property="og:locale" content="nb_NO">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Skriften Inter ligger på nettsiden (skrift/), ikke hos Google. -->
 
   <!-- tokens.css: farger, fonter og størrelser. stil.css: felles oppsett for alle sider. -->
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="stil.css">
 </head>
 <body>
+  <a class="hopp" href="#innhold">Hopp til innhold</a>
 
 
   <header class="nav" id="nav">
@@ -52,7 +63,7 @@
     </button>
   </header>
 
-  <main>
+  <main id="innhold" tabindex="-1">
     <section class="sidetopp">
       <h1 class="sidetittel">Katalog</h1>
     </section>
@@ -61,7 +72,19 @@
       <h2 class="sr-only" id="alle-utgivelser">Alle utgivelser</h2>
       <!-- Utgivelsene er hentet fra taragot.bandcamp.com/music (nyeste først).
            De 8 første coverne ligger i bilder/covers/, resten hentes fra Bandcamp. -->
-      <div class="kort-rad">
+      <div class="katalogsok">
+        <label class="sokefelt">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="M12.2 12.2 16 16"/></svg>
+          <span class="sr-only">Søk i katalogen</span>
+          <input type="search" id="katalogsok" placeholder="Søk etter album eller artist" autocomplete="off" spellcheck="false" aria-controls="katalogliste">
+          <button type="button" class="sok-tom" id="sok-tom" aria-label="Tøm søket" hidden>
+            <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9"/></svg>
+          </button>
+        </label>
+        <p class="sok-antall" id="sok-antall" role="status" aria-live="polite"></p>
+      </div>
+      <p class="sok-ingen" id="sok-ingen" hidden></p>
+      <div class="kort-rad" id="katalogliste">
         <a class="kort" href="https://taragot.bandcamp.com/album/nuddeln" target="_blank" rel="noopener" data-slipp="2026-11-21"><div class="cover">Nuddeln<img src="bilder/covers/nuddeln.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="slipp-merke">Slippes 21. nov.</span></div><h3>Nuddeln<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Ester og Astrid</p><p class="format">Digital</p><span class="sr-only"> – forhåndslytt på Bandcamp (åpnes i ny fane)</span></a>
         <a class="kort" href="https://taragot.bandcamp.com/album/l-ngs-med-gr-nsen" target="_blank" rel="noopener"><div class="cover">Längs med gränsen<img src="bilder/covers/langs-med-gransen.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Längs med gränsen<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Mats Berglund Trio</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
         <a class="kort" href="https://taragot.bandcamp.com/album/kr-ta" target="_blank" rel="noopener"><div class="cover">Króta<img src="bilder/covers/krota.jpg" alt="" loading="lazy" onerror="this.remove()"></div><h3>Króta<span class="pil-ut" aria-hidden="true">↗</span></h3><p class="artist">Edén/Kvifte/Nesheim Trio</p><p class="format">CD, digital</p><span class="sr-only"> – hør på Bandcamp (åpnes i ny fane)</span></a>
@@ -167,6 +190,7 @@
     </div>
     <div class="footer-bunn">
       <span>© 2026 Taragot Sounds · Org. nr. 997 677 897</span>
+      <a class="lenke" href="personvern.html">Personvern</a>
     </div>
   </footer>
 

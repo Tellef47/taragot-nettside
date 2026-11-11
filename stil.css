@@ -4,7 +4,30 @@
    Ny layout 2026-10-26 etter Mildrids skisser.
    ===================================================================== */
 
+/* Skriften Inter (OFL-lisens, se skrift/LISENS-Inter-OFL.txt) ligger på nettsiden */
+@font-face { font-family: "Inter"; font-weight: 400; font-style: normal; font-display: swap; src: url("skrift/inter-regular.woff") format("woff"); }
+@font-face { font-family: "Inter"; font-weight: 500; font-style: normal; font-display: swap; src: url("skrift/inter-medium.woff") format("woff"); }
+@font-face { font-family: "Inter"; font-weight: 600; font-style: normal; font-display: swap; src: url("skrift/inter-semibold.woff") format("woff"); }
+
 * { box-sizing: border-box; }
+
+/* «Hopp til innhold»: skjult til man trykker Tab */
+.hopp {
+  position: absolute; left: var(--gutter); top: -60px; z-index: 100;
+  background: var(--text); color: #FFFFFF; padding: 10px 16px; border-radius: 6px;
+  font-size: var(--t-liten); font-weight: 600; transition: top .15s ease;
+}
+.hopp:focus { top: 12px; }
+main:focus { outline: none; }
+main { scroll-margin-top: 130px; } /* så toppmenyen ikke dekker overskriften etter «Hopp til innhold» */
+
+/* Personvern-siden */
+.juridisk { max-width: 68ch; padding: 0 var(--gutter) var(--seksjon-luft); }
+.juridisk h2 { font-size: var(--t-meny); font-weight: 600; margin: 40px 0 10px; }
+.juridisk p, .juridisk li { font-size: var(--t-brod); line-height: 1.65; margin: 0 0 12px; }
+.juridisk ul { padding-left: 20px; margin: 0 0 12px; }
+.juridisk .lenke { font-size: inherit; }
+.juridisk .oppdatert { color: var(--text-svak-2); font-size: var(--t-liten); margin-top: 40px; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
@@ -190,6 +213,34 @@ a:focus-visible, button:focus-visible {
 .kort:hover .pil-ut, .kort:focus-visible .pil-ut { color: var(--text); transform: translate(2px, -2px); }
 .kort .artist { font-size: var(--t-meny); color: var(--text-svak-2); margin: 0; line-height: 1.3; }
 .kort .format { font-size: var(--t-caption); color: var(--text-svak-2); margin: 4px 0 0; }
+/* Søk i katalogen */
+.katalogsok { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap; margin: 0 0 36px; }
+.sokefelt {
+  display: flex; align-items: center; gap: 10px; flex: 0 1 420px;
+  height: 48px; padding: 0 8px 0 16px;
+  border: 1px solid var(--felt-kant); border-radius: 6px; background: var(--bg-alt);
+  transition: border-color .15s ease;
+}
+.sokefelt:hover { border-color: var(--text); }
+.sokefelt:focus-within { border-color: var(--text); outline: 2px solid var(--text); outline-offset: 1px; }
+.sokefelt > svg { flex: none; width: 18px; height: 18px; color: var(--text-svak-2); }
+.sokefelt input {
+  flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: none;
+  font-family: var(--font-brodtekst); font-size: var(--t-meny); color: var(--text);
+}
+.sokefelt input::placeholder { color: var(--text-svak-2); }
+.sokefelt input::-webkit-search-cancel-button { display: none; }
+.sok-tom {
+  flex: none; width: 34px; height: 34px; border-radius: 50%; border: 0; background: none;
+  color: var(--text); cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+}
+.sok-tom[hidden] { display: none; }
+.sok-tom:hover { background: var(--bg-alt-2); }
+.sok-tom svg { width: 16px; height: 16px; }
+.sok-antall { margin: 0; font-size: var(--t-liten); color: var(--text-svak-2); }
+.sok-ingen { margin: 0 0 40px; font-size: var(--t-meny); }
+.kort[hidden] { display: none; }
+
 /* Kommende utgivelse: merke oppå coveret. Fjernes automatisk på slippdagen (felles.js). */
 .slipp-merke {
   position: absolute; left: 10px; top: 10px; z-index: 2;
@@ -333,7 +384,7 @@ footer {
 .footer-kol p, .footer-kol ul { margin: 0; padding: 0; list-style: none; line-height: 1.9; }
 .footer-kol .lenke { font-size: var(--t-liten); }
 .footer-bunn {
-  display: flex; justify-content: space-between; align-items: center; gap: 20px;
+  display: flex; justify-content: flex-start; align-items: center; gap: 24px; flex-wrap: wrap;
   padding-top: 8px; font-size: var(--t-caption); color: var(--text-svak-2);
 }
 /* Til toppen: rund knapp med pil, samme stil som menyknappen.
@@ -365,6 +416,7 @@ body.meny-apen .til-toppen { visibility: hidden; }
   /* Nettbrett og mobil: tittel over innholdet i Kontakt oss og på Katalog */
   .footer-kontakt { grid-template-columns: 1fr; gap: 24px; }
   .sidetopp--to-kol { grid-template-columns: 1fr; gap: 0; }
+  .sokefelt { flex-basis: 100%; }
   .sidetopp--to-kol .sideingress { margin-top: 24px; }
 
   /* Nettbrett og mobil: rund menyknapp i stedet for menylinjen */
@@ -456,3 +508,5 @@ body.meny-apen .til-toppen { visibility: hidden; }
   html { scroll-behavior: auto; }
   .nav, .kort, .cover img { transition: none; }
 }
+
+.footer-bunn .lenke { font-size: var(--t-caption); }
