@@ -49,8 +49,6 @@ har alle oversettelsene. Endres en norsk side, må skriptet kjøres på nytt
 Albumtitler, artistnavn, navn, e-post og telefon oversettes ikke.
 
 ## Andre filer
-- `personvern.html` (og `en/privacy.html`): personvernerklæring. Les den gjennom
-  og oppdater den hvis dere tar i bruk nye tjenester (f.eks. statistikk).
 - `skrift/`: skriften Inter, lagret på nettsiden i stedet for hos Google
   (OFL-lisens, se `skrift/LISENS-Inter-OFL.txt`).
 - `favicon-32.png` og `apple-touch-icon.png`: ikon i nettleserfanen og på hjemskjermen.
