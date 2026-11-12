@@ -464,6 +464,11 @@ body.meny-apen .til-toppen { visibility: hidden; }
   .sidetopp--to-kol { grid-template-columns: 1fr; gap: 0; }
   .sidetopp--to-kol .sideingress { margin-top: 18px; }
 
+  /* Om oss: Historien før portrettene på mobil */
+  .om-side { display: flex; flex-direction: column; }
+  .om-side .historien { order: 1; padding-top: 0; }
+  .om-side .folk-seksjon { order: 2; padding-bottom: var(--seksjon-luft); }
+
   .utgivelser-topp { margin-bottom: 18px; }
   .pilknapper { display: flex; }
 
