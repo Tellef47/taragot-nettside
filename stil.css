@@ -387,6 +387,8 @@ footer {
   display: flex; justify-content: flex-start; align-items: center; gap: 24px; flex-wrap: wrap;
   padding-top: 8px; font-size: var(--t-caption); color: var(--text-svak-2);
 }
+/* Designkreditering: til høyre på PC (med plass til til-toppen-knappen), under og venstrestilt på mobil */
+.kreditering { margin-left: auto; margin-right: 64px; }
 /* Til toppen: rund knapp med pil, samme stil som menyknappen.
    Ligger fast nede i høyre hjørne og vises når man har scrollet ned. */
 .til-toppen {
@@ -454,6 +456,8 @@ body.meny-apen .til-toppen { visibility: hidden; }
    MOBIL
    ===================================================================== */
 @media (max-width: 767px) {
+  .kreditering { margin: 0; flex-basis: 100%; }
+  .footer-bunn { row-gap: 8px; }
   :root { --gutter: 20px; --t-h2-ny: 20px; --t-sidetittel-ny: 28px; --t-ingress: 19px; --seksjon-luft: 48px; }
 
   .logo img { width: 68px; }
