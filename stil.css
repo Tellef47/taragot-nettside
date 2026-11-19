@@ -373,17 +373,19 @@ footer {
 .footer-kontakt { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; padding-bottom: 56px; }
 .footer-grid {
   display: grid; grid-template-columns: repeat(4, max-content);
-  justify-content: space-between; gap: 40px 24px;
+  justify-content: space-between; gap: 48px 24px;
 }
 .footer-kol--person h3 { white-space: nowrap; }
 /* Litt ekstra luft mellom personene og Adresse / Følg oss */
 .footer-grid > .footer-kol:not(.footer-kol--person) { margin-top: 24px; }
 .footer-kol h3 {
-  margin: 0 0 10px; font-size: var(--t-caption); font-weight: 600;
+  margin: 0 0 4px; font-size: var(--t-caption); font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-svak-2);
 }
-.footer-kol p, .footer-kol ul { margin: 0; padding: 0; list-style: none; line-height: 1.9; }
-.footer-kol .lenke { font-size: var(--t-liten); }
+/* Navn, e-post og telefon står tett som én gruppe; lenkene har litt luft rundt seg så de er lettere å trykke på (26 px høye) */
+.footer-kol p, .footer-kol ul { margin: 0; padding: 0; list-style: none; line-height: 1.4; }
+.footer-kol p { padding: 3px 0; }
+.footer-kol .lenke { font-size: var(--t-liten); display: inline-block; padding: 3px 0; }
 .footer-bunn {
   display: flex; justify-content: flex-start; align-items: center; gap: 24px; flex-wrap: wrap;
   padding-top: 8px; font-size: var(--t-caption); color: var(--text-svak-2);
@@ -511,7 +513,7 @@ body.meny-apen .til-toppen { visibility: hidden; }
 
   footer { padding: 48px 0 28px; }
   .footer-kontakt { grid-template-columns: 1fr; gap: 24px; padding-bottom: 32px; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px 16px; }
   .footer-kol--person { grid-column: 1 / -1; }
 }
 
