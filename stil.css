@@ -144,11 +144,12 @@ a:focus-visible, button:focus-visible {
 .nav--apen .meny-knapp .ikon-lukk { display: block; }
 
 /* --- Forside: intro ---------------------------------------------------- */
-.intro { padding: 72px var(--gutter) var(--seksjon-luft); }
+.intro { padding: 104px var(--gutter) var(--seksjon-luft); }
 .intro h1 {
   margin: 0; max-width: 23em;
-  font-size: clamp(28px, 2.8vw, 38px); font-weight: 400;
-  line-height: 1.15; letter-spacing: -0.015em;
+  font-size: clamp(28px, 3vw, 42px); font-weight: 400;
+  line-height: 1.35; letter-spacing: -0.015em;
+  text-wrap: balance;   /* jevne linjer: nettleseren fordeler ordene så linjene blir omtrent like lange */
 }
 
 /* --- Undersider: sidetopp ---------------------------------------------- */
@@ -462,7 +463,7 @@ body.meny-apen .til-toppen { visibility: hidden; }
 
   .logo img { width: 68px; }
 
-  .intro { padding: 28px var(--gutter) var(--seksjon-luft); }
+  .intro { padding: 48px var(--gutter) var(--seksjon-luft); }
   .intro h1 { font-size: 24px; }
   .sidetopp { padding: 32px var(--gutter) 36px; }
   .sidetopp--to-kol { grid-template-columns: 1fr; gap: 0; }
